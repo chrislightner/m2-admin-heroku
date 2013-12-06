@@ -1,0 +1,58 @@
+<div class="header">
+    <div class="pull-right">
+        <strong>{{ currentUser.username | capitalize }}</strong>&nbsp;&nbsp;&nbsp;<a href="#" ng-click="logout()">Logout <i class="glyphicon glyphicon-log-out"></i></a>
+    </div>
+    <img src="images/index-tech.png" class="logo">
+    <h1>Microsite Administration</h1>
+    <h4>Version 2.0</h4>
+    <ul class="nav nav-tabs">
+        <li><a href="#/campaigns">Manage Campaigns</a></li>
+        <li><a href="#/groups">Manage Groups</a></li>
+        <li class="active"><a href="#/products">Manage Products</a></li>
+        <li ng-show="currentUser.role == 1"><a href="#/users">Manage Users</a></li>
+    </ul>
+</div>
+
+
+<div>
+    <a ng-href="#/products">
+        <span class="glyphicon glyphicon-arrow-left"></span>
+        Back to Products
+    </a>
+    <div class="page-header">
+        <h2>Create a New Product</h2>
+    </div>
+
+
+    <form class="form-horizontal" role="form" ng-submit="submitCreateProduct(product)">
+
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3 class="panel-title">General</h3></div>
+            <div class="panel-body">
+
+                <div class="form-group">
+                    <label for="product-full-name" class="col-lg-4 control-label">Full Product Name</label>
+                    <div class="col-lg-8">
+                        <input type="text" name="product-full-name" id="product-full-name" class="form-control" ng-model="product.name">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="product-short-name" class="col-lg-4 control-label">Short Product Name</label>
+                    <div class="col-lg-8">
+                        <input type="text" name="product-short-name" id="product-short-name" class="form-control" ng-model="product.shortName">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="video-link" class="col-lg-4 control-label">Flimp Video Link</label>
+                    <div class="col-lg-8">
+                        <input type="text" name="video-link" id="video-link" class="form-control" ng-model="product.flimpLink">
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <input type="submit" class="btn btn-primary btn-lg">
+    </form>
+</div>

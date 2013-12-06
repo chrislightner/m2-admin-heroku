@@ -1,0 +1,114 @@
+<div class="header">
+    <div class="pull-right">
+        <strong>{{ currentUser.username | capitalize }}</strong>&nbsp;&nbsp;&nbsp;<a href="#" ng-click="logout()">Logout <i class="glyphicon glyphicon-log-out"></i></a>
+    </div>
+    <img src="images/index-tech.png" class="logo">
+    <h1>Microsite Administration</h1>
+    <h4>Version 2.0</h4>
+    <ul class="nav nav-tabs">
+        <li><a href="#/campaigns">Manage Campaigns</a></li>
+        <li class="active"><a href="#/groups">Manage Groups</a></li>
+        <li><a href="#/products">Manage Products</a></li>
+        <li ng-show="currentUser.role == 1"><a href="#/users">Manage Users</a></li>
+    </ul>
+</div>
+
+
+<div>
+    <a ng-href="#/groups">
+        <span class="glyphicon glyphicon-arrow-left"></span>
+        Back to Groups
+    </a>
+    <div class="page-header">
+        <h2>Create a New Group</h2>
+    </div>
+
+    <form class="form-horizontal" role="form" ng-submit="submitCreateGroup(group)">
+
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3 class="panel-title">General</h3></div>
+            <div class="panel-body">
+
+                <div class="form-group">
+                    <label for="group-full-name" class="col-lg-4 control-label">Full Name</label>
+                    <div class="col-lg-8">
+                        <input type="text" name="group-full-name" id="group-full-name" class="form-control" ng-model="group.name">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="group-short-name" class="col-lg-4 control-label">Short Name</label>
+                    <div class="col-lg-8">
+                        <input type="text" name="group-short-name" id="group-short-name" class="form-control" ng-model="group.shortName">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="tpa" class="col-lg-4 control-label">TPA</label>
+                    <div class="col-lg-8">
+
+                        <select name="tpa" id="tpa" class="form-control" ng-model="group.tpa" ng-options="tpa.name for tpa in tpas">
+                            <option value="">-- choose tpa --</option>
+                        </select>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="group-street" class="col-lg-4 control-label">Street Address</label>
+                    <div class="col-lg-8">
+                        <input type="text" name="group-street" id="group-street" class="form-control" ng-model="group.streetAddress">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="group-city" class="col-lg-4 control-label">City</label>
+                    <div class="col-lg-8">
+                        <input type="text" name="group-city" id="group-city" class="form-control" ng-model="group.city">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="group-state" class="col-lg-4 control-label">State</label>
+                    <div class="col-lg-8">
+                        <input type="text" name="group-state" id="group-state" class="form-control" ng-model="group.state">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="group-zip" class="col-lg-4 control-label">ZIP</label>
+                    <div class="col-lg-8">
+                        <input type="text" name="group-zip" id="group-zip" class="form-control" ng-model="group.zipCode">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="group-phone-1" class="col-lg-4 control-label">Phone 1</label>
+                    <div class="col-lg-8">
+                        <input type="text" name="group-phone-1" id="group-phone-1" class="form-control" ng-model="group.phone">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="group-phone-2" class="col-lg-4 control-label">Phone 2</label>
+                    <div class="col-lg-8">
+                        <input type="text" name="group-phone-2" id="group-phone-2" class="form-control" ng-model="group.phone2">
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+
+
+
+
+        <input type="submit" class="btn btn-primary btn-lg">
+
+
+    </form>
+
+</div>

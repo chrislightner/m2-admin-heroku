@@ -1,0 +1,51 @@
+<div class="header">
+	<div class="pull-right">
+		<strong>{{ currentUser.username | capitalize }}</strong>&nbsp;&nbsp;&nbsp;<a href="#" ng-click="logout()">Logout <i class="glyphicon glyphicon-log-out"></i></a>
+	</div>
+	<img src="images/index-tech.png" class="logo">
+	<h1>Microsite Administration</h1>
+	<h4>Version 2.0</h4>
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="#/campaigns">Manage Campaigns</a></li>
+		<li><a href="#/groups">Manage Groups</a></li>
+		<li><a href="#/products">Manage Products</a></li>
+		<li ng-hide="currentUser.role !== 1"><a href="#/users">Manage Users</a></li>
+	</ul>
+</div>
+<div class="slide-reveal">
+	<div class="page-header">
+		<h2>Manage Campaigns</h2>
+	</div>
+	<p ng-show="currentUser.role <= 2">
+		<a href="#/campaigns/new">
+			<span class="glyphicon glyphicon-plus"></span>
+			Create a New Campaign
+		</a>
+	</p>
+	<table class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>Job Number</th>
+				<th>Group</th>
+				<th>Product</th>
+				<th>Description</th>
+				<th>Last Modified</th>
+				<th ng-show="currentUser.role <= 2">&nbsp;</th>
+				<th ng-show="currentUser.role <= 2">&nbsp;</th>
+			</tr>
+		</thead>
+		<tbody>
+	
+			<tr ng-repeat="campaign in campaigns">
+				<td>{{ campaign.jobNumber }}</td>
+				<td>{{ campaign.group.shortName }}</td>
+				<td>{{ campaign.product.shortName }}</td>
+				<td>{{ campaign.description }}</td>
+				<td>{{ campaign.lastModified | datetimeToDate | date:'EEE MM/dd/yyyy @ h:mma'}}</td>
+				<td ng-show="currentUser.role <= 2" class="text-center"><a ng-href="#/campaigns/{{ campaign.id }}"><i class="glyphicon glyphicon-edit"></i></a></td>
+				<td ng-show="currentUser.role <= 2" class="text-center"><a ng-href="http://localhost:9000/#/{{ campaign.group.shortName | lowercase }}/{{campaign.product.shortName | lowercase }}/{{campaign.shortName}}" target="_blank"><i class="glyphicon glyphicon-new-window"></i></a></td>
+			</tr>
+
+		</tbody>
+	</table>	
+</div>

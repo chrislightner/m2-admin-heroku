@@ -1,0 +1,12 @@
+<div class="modal-header">
+    <h3>Permantly Delete {{ user.username }}?</h3>
+</div>
+<div class="modal-body">
+	<p>
+		Are you sure you want to <strong>permantly</strong> delete {{ user.username }}? This is not reversible.
+	</p>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-danger" ng-click="ok()">Delete {{ user.username }}</button>
+    <button class="btn" ng-click="cancel()">Nevermind</button>
+</div>

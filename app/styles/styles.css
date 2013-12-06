@@ -1,0 +1,75 @@
+/* Space out content a bit */
+body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.header {
+	border-bottom: none;
+	margin-bottom: 30px;
+}
+
+.logo{
+	height: 40px;
+	width: 40px;
+	margin: 0 5px 5px 0;
+	float:left;
+
+}
+
+.modal {
+	background: #fff;
+	bottom: 0;
+	display: block;
+	height: 325px;
+	left: 0;
+	margin: -152px auto 0;
+	overflow: auto;
+	overflow-y: scroll;
+	position: fixed;
+	right: 0;
+	top: 50%;
+	width: 500px;
+	z-index: 1040;
+}
+
+.slide-up.ng-enter {
+	-webkit-transition: 1s;
+	transition: 1s;
+	margin-top: 50px;
+	opacity: 0;
+}
+
+.slide-up.ng-enter-active {
+	margin-top: 0;
+	opacity: 1;
+}
+
+.slide-up.ng-leave {
+	-webkit-transition: 1s;
+	transition: 1s;
+
+	margin-top: 0;
+	opacity: 1;
+}
+
+.slide-up.ng-leave-active {
+	margin-top: 50px;
+	opacity: 0;
+}
+
+.ta-editor, .ta-editor.form-control{
+	display: block;
+	max-height: 600px;
+    min-height: 300px;
+    height: auto;
+    overflow: auto;
+    font-family: inherit;
+    font-size: 100%;
+}
+
+#login-form input[type='text'], #login-form input[type='password']{
+    font-size: 24px;
+    padding: 11px 12px; 
+    height: 44px;
+}
