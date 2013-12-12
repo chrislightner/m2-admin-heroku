@@ -125,6 +125,9 @@ angular.module('m2AdminApp', [
               $log.info("Login Successful");
               $rootScope.currentUser.role = parseInt(data.role);
               $rootScope.currentUser.isLoggedIn = true;
+              if($location.path() === "/login"){
+                $location.url("/campaigns");                
+              }
               return true;
             }
           })

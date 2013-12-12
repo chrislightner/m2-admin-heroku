@@ -65,9 +65,9 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="segmentio-id" class="col-lg-4 control-label">Segment.io ID</label>
-					<div class="col-lg-8">
-						<input type="text" name="segmentio-id" id="segmentio-id" class="form-control" ng-model="campaign.segmentioID">
+					<label for="enrollment-link" class="col-lg-4 control-label">Enrollment Link:</label>
+					<div class="col-lg-8 input-group">
+						<input type="text" name="enrollment-link" id="enrollment-link" class="form-control" ng-model="campaign.enrollmentLink">
 					</div>
 				</div>
 				<div class="form-group">
@@ -76,6 +76,12 @@
 						<input type="text" name="complianceCode" id="complianceCode" class="form-control" ng-model="campaign.complianceCode">
 					</div>
 				</div>
+				<div class="form-group">
+					<label for="segmentio-id" class="col-lg-4 control-label">Segment.io ID</label>
+					<div class="col-lg-8">
+						<input type="text" name="segmentio-id" id="segmentio-id" class="form-control" ng-model="campaign.segmentioID">
+					</div>
+				</div>	
 				<div class="form-group">
 					<p class="col-lg-4 control-label"><strong>Approved by Compliance?</strong></p>
 					<div class="col-lg-8">
@@ -144,12 +150,14 @@
 						<input type="text" name="leadin-copy" id="leadin-copy" class="form-control" ng-model="campaign.leadInCopy">
 					</div>
 				</div>  
+				<!--
 				<div class="form-group">
 					<label for="video-html" class="col-lg-4 control-label">Video HTML</label>
 					<div class="col-lg-8 input-group">
 						<input type="text" name="video-html" id="video-html" class="form-control" ng-model="campaign.videoHtml">
 					</div>
 				</div>
+				-->
 				<div class="form-group">
 					<label for="video-headline" class="col-lg-4 control-label">Video Headline</label>
 					<div class="col-lg-8 input-group">
@@ -178,12 +186,6 @@
 					</div>
 				</div>  
 				<div class="form-group">
-					<label for="enrollment-link" class="col-lg-4 control-label">Enrollment Link:</label>
-					<div class="col-lg-8 input-group">
-						<input type="text" name="enrollment-link" id="enrollment-link" class="form-control" ng-model="campaign.enrollmentLink">
-					</div>
-				</div>
-				<div class="form-group">
 					<label for="footer-content" class="col-lg-4 control-label">Footer Content</label>
 					<div class="col-lg-8 input-group">
 						<div text-angular text-angular-name="footer-content-editor" id="footer-content" name="footer-content" rows="10" cols="80" ng-model="campaign.footerHtml"></div>
@@ -207,6 +209,7 @@
 			</div>
 		</div>
 
+		<!--
 		<div class="panel panel-default">
 			<div class="panel-heading"><h3 class="panel-title">Design</h3></div>
 			<div class="panel-body">
@@ -302,7 +305,7 @@
 
 			</div>
 		</div>
-	
+		-->
 		<div class="panel panel-default">
 			<div class="panel-heading"><h3 class="panel-title">Delete Campaign</h3></div>
 			<div class="panel-body">

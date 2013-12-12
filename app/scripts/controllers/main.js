@@ -33,6 +33,9 @@ angular.module('m2AdminApp')
 })
 .controller('CampaignsCtrl', function($scope, $http, $routeParams, $log){
 	
+	$scope.campaignSort = "jobNumber";
+	$scope.campaignSortReverse = false;
+
 	$http.get('http://api.zeisgroupdevelopment.com/campaigns/campaignAll/')
 		.success(function(data){
 			$scope.campaigns = data;
@@ -40,6 +43,11 @@ angular.module('m2AdminApp')
 		.error(function(data){
 			$log.info(data);
 		});
+
+	$scope.sortBy = function(sortBy){
+		$scope.campaignSort = sortBy;
+		$scope.campaignSortReverse = !$scope.campaignSortReverse;
+	}
 
 })
 .controller('CampaignCtrl', function($scope, $http, $routeParams, $log, $location, $modal, $filter){

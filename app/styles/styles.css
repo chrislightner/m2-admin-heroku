@@ -73,3 +73,8 @@ body {
     padding: 11px 12px; 
     height: 44px;
 }
+
+#campaignsTable tr th:hover{
+    background-color: #F5F5F5;
+    cursor: pointer;
+}

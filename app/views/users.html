@@ -28,19 +28,19 @@
 	<table class="table table-responsive table-bordered table-hover">
 		<thead>
 			<tr>
+				<th ng-show="currentUser.role == 1">&nbsp;</th>
 				<th>Name</th>
 				<th>Username</th>
 				<th>Role</th>
-				<th ng-show="currentUser.role == 1">&nbsp;</th>
 			</tr>
 		</thead>
 		<tbody>
 
-			<tr ng-repeat="user in users">
+			<tr ng-repeat="user in users | orderBy:username">
+				<td ng-show="currentUser.role == 1" class="text-center"><a ng-href="#/users/{{ user.username }}"><i class="glyphicon glyphicon-edit"></i></a></td>
 				<td>{{ user.fname }} {{ user.lname }}</td>
 				<td>{{ user.username }}</td>
 				<td>{{ user.role }}</td>
-				<td ng-show="currentUser.role == 1" class="text-center"><a ng-href="#/users/{{ user.username }}"><i class="glyphicon glyphicon-edit"></i></a></td>
 			</tr>
 
 		</tbody>
