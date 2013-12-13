@@ -128,14 +128,14 @@
 						</label>
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group" ng-if="campaign.hasCalc">
 					<label for="calc-html" class="col-lg-4 control-label">Calculator HTML</label>
 					<div class="col-lg-8 input-group">
 						<span class="input-group-addon">calculators/</span>
 						<input type="text" name="calc-html" id="calc-html" class="form-control" ng-model="campaign.calcHtml">
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group" ng-if="campaign.hasCalc">
 					<label for="calc-data" class="col-lg-4 control-label">Calculator Data</label>
 					<div class="col-lg-8 input-group">
 						<span class="input-group-addon">calculators/</span>
