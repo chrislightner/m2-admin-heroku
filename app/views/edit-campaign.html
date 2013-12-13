@@ -65,6 +65,15 @@
 					</div>
 				</div>
 				<div class="form-group">
+					<label for="eenroll" class="col-lg-4 control-label">Enrollment Method:</label>
+					<div class="col-lg-8 input-group">
+						<div class="enrollment-switch">
+							<input type="radio" ng-model="campaign.eEnroll" value="1"> eEnroll <br/>
+							<input type="radio" ng-model="campaign.eEnroll" value="0"> Downloadable PDF <br/>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
 					<label for="enrollment-link" class="col-lg-4 control-label">Enrollment Link:</label>
 					<div class="col-lg-8 input-group">
 						<input type="text" name="enrollment-link" id="enrollment-link" class="form-control" ng-model="campaign.enrollmentLink">

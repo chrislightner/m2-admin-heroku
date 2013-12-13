@@ -37,3 +37,14 @@ angular.module('m2AdminApp')
 			}
 		};
 	})
+	.directive('bootstrapSwitch', ['$timeout', function(timer){
+		return {
+			restrict: 'A',
+			link: function(scope, element, attrs) {
+				var bsswitch = function(){
+					angular.element(element).bootstrapSwitch( scope.$eval(attrs.bootstrapSwitch) );
+				};
+				timer(bsswitch, 0);
+			}
+		};
+	}]);
