@@ -1,3 +1,5 @@
+/.grunt/ftpush/dev.json
+/.grunt/ftpush/prod.json
 /sftp-config.json
 node_modules
 dist
