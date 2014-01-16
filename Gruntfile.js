@@ -349,6 +349,31 @@ module.exports = function (grunt) {
         configFile: 'karma.conf.js',
         singleRun: true
       }
+    },
+
+    ftpush: {
+      dev: {
+        auth: {
+          host: '184.106.77.105',
+          port: 21,
+          authKey: 'dev'
+        },
+        src: '<%= yeoman.dist %>/',
+        dest: '/admin/',
+        simple: 'true',
+        useList: 'false'
+      },
+      prod: {
+        auth: {
+          host: '184.106.77.105',//ftp host, not www host
+          port: 21,
+          authKey: 'prod'
+        },
+        src: '<%= yeoman.dist %>/',
+        dest: '/admin/',
+        simple: 'true',
+        useList: 'false'
+      }
     }
   });
 
@@ -358,7 +383,7 @@ module.exports = function (grunt) {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
     }
 
-    grunt.task.run([
+  grunt.task.run([
       'clean:server',
       'concurrent:server',
       'autoprefixer',
@@ -394,6 +419,20 @@ module.exports = function (grunt) {
     'rev',
     'usemin'
   ]);
+
+  grunt.registerTask('deploy', function(target) {
+    if (target === 'dev') {
+      return grunt.task.run([
+        'build',
+        'ftpush:dev'
+      ]);
+    }else if(target === "prod"){
+      return grunt.task.run([
+        'build',
+        'ftpush:prod'
+      ]);
+    }
+  });
 
   grunt.registerTask('default', [
     'newer:jshint',

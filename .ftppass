@@ -1,0 +1,10 @@
+{
+  "dev": {
+    "username": "zeisgroup_dev",
+    "password": "GetsResultsZG39="
+  },
+  "prod": {
+    "username": "coverage",
+    "password": "GetsResultsZG39="
+  }
+}

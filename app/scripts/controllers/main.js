@@ -1,5 +1,11 @@
 'use strict';
 
+var apiUrl;
+if(window.location.host === 'coveragedetails.net'){
+	apiUrl = 'http://coveragedetails.net/api';
+}else{
+	apiUrl = 'http://zeisgroupdevelopment.com/api';
+}
 angular.module('m2AdminApp')
 .controller('IndexCtrl', function(){
 
@@ -7,11 +13,11 @@ angular.module('m2AdminApp')
 .controller('LoginCtrl', function($scope, $http, $log, $location){
 	
 	$scope.checkLogin = function(credentials){
-		$http.post('http://zeisgroupdevelopment.com/api/login', credentials)
+		$http.post( apiUrl + '/login', credentials)
 			.success(function(data){
 				$log.info(data);
 				if(data.status === 'success'){
-					$http.get('http://zeisgroupdevelopment.com/api/users/' + data.username)
+					$http.get( apiUrl + '/users/' + data.username)
 						.success(function(data){
 							$scope.currentUser = data;
 						})
@@ -36,7 +42,7 @@ angular.module('m2AdminApp')
 	$scope.campaignSort = "jobNumber";
 	$scope.campaignSortReverse = false;
 
-	$http.get('http://zeisgroupdevelopment.com/api/campaigns/campaignAll/')
+	$http.get( apiUrl + '/campaigns/campaignAll/')
 		.success(function(data){
 			$scope.campaigns = data;
 		})
@@ -52,7 +58,7 @@ angular.module('m2AdminApp')
 })
 .controller('CampaignCtrl', function($scope, $http, $routeParams, $log, $location, $modal, $filter){
 	
-	$http.get('http://zeisgroupdevelopment.com/api/campaigns/campaignAllById/' + $routeParams.campaignid)
+	$http.get( apiUrl + '/campaigns/campaignAllById/' + $routeParams.campaignid)
 		.success(function(data){
 			$scope.campaign = data;
 		})
@@ -60,7 +66,7 @@ angular.module('m2AdminApp')
 			$log.info(data);
 		});
 
-	$http.get('http://zeisgroupdevelopment.com/api/groups')
+	$http.get( apiUrl + '/groups')
 		.success(function(data){
 			$scope.groups = data;
 		})
@@ -68,7 +74,7 @@ angular.module('m2AdminApp')
 			$log.info(data);
 		});
 
-	$http.get('http://zeisgroupdevelopment.com/api/products')
+	$http.get( apiUrl + '/products')
 		.success(function(data){
 			$scope.products = data;
 		})
@@ -84,7 +90,7 @@ angular.module('m2AdminApp')
 
 		console.log(campaign);
 
-		$http.put('http://zeisgroupdevelopment.com/api/campaigns', campaign)
+		$http.put( apiUrl + '/campaigns', campaign)
 			.success(function(data){
 				$log.info('Saved ', data);
 				$location.url('/campaigns');
@@ -110,7 +116,7 @@ angular.module('m2AdminApp')
 
 			if(deleteVerify === 'delete'){
 				//using $http.delete() throws a parse error in IE8, use $http['delete'] instead
-				$http['delete']('http://zeisgroupdevelopment.com/api/campaigns/' + $scope.campaign.id )
+				$http['delete']( apiUrl + '/campaigns/' + $scope.campaign.id )
 				.success(function(){
 					$location.url('/campaigns');
 				})
@@ -138,7 +144,7 @@ angular.module('m2AdminApp')
 })
 .controller('CreateCampaignCtrl', function($scope, $http, $routeParams, $log, $location, $filter){
 
-	// $http.get('http://zeisgroupdevelopment.com/api/campaigns')
+	// $http.get( apiUrl + '/campaigns')
 	// 	.success(function(data){
 	// 		$scope.campaigns = data;
 	// 	})
@@ -150,7 +156,7 @@ angular.module('m2AdminApp')
 		$scope.campaign.shortName = $filter('jobNumberToShortName')($scope.campaign.jobNumber);
 	}
 
-	$http.get('http://zeisgroupdevelopment.com/api/groups')
+	$http.get( apiUrl + '/groups')
 		.success(function(data){
 			$scope.groups = data;
 		})
@@ -158,7 +164,7 @@ angular.module('m2AdminApp')
 			$log.info(data);
 		});
 
-	$http.get('http://zeisgroupdevelopment.com/api/products')
+	$http.get( apiUrl + '/products')
 		.success(function(data){
 			$scope.products = data;
 		})
@@ -168,7 +174,7 @@ angular.module('m2AdminApp')
 
 	$scope.submitCreateCampaign = function(campaign){
 
-		$http.post('http://zeisgroupdevelopment.com/api/campaigns/new', campaign)
+		$http.post( apiUrl + '/campaigns/new', campaign)
 			.success(function(data){
 				$log.info('Saved ', data);
 				$location.url('/campaigns');
@@ -181,7 +187,7 @@ angular.module('m2AdminApp')
 })
 .controller('GroupsCtrl', function($scope, $http, $routeParams, $log){
 	
-	$http.get('http://zeisgroupdevelopment.com/api/groups')
+	$http.get( apiUrl + '/groups')
 	.success(function(data){
 		$scope.groups = data;
 	})
@@ -192,7 +198,7 @@ angular.module('m2AdminApp')
 })
 .controller('GroupCtrl', function($scope, $http, $routeParams, $log, $location, $modal){	
 
-	$http.get('http://zeisgroupdevelopment.com/api/groups/' + $routeParams.groupShortName)
+	$http.get( apiUrl + '/groups/' + $routeParams.groupShortName)
 		.success(function(data){
 			$scope.group = data;
 		})
@@ -200,7 +206,7 @@ angular.module('m2AdminApp')
 			$log.info(data);
 		});
 
-	$http.get('http://zeisgroupdevelopment.com/api/tpas')
+	$http.get( apiUrl + '/tpas')
 		.success(function(data){
 			$scope.tpas = data;
 		})
@@ -209,7 +215,7 @@ angular.module('m2AdminApp')
 		});
 
 	$scope.saveGroup = function(group){
-		$http.put('http://zeisgroupdevelopment.com/api/groups', group)
+		$http.put( apiUrl + '/groups', group)
 			.success(function(data){
 				$log.info('Saved ', data);
 				$location.url('/groups');
@@ -234,7 +240,7 @@ angular.module('m2AdminApp')
 		modalInstance.result.then(function (deleteVerify){
 			if(deleteVerify === 'delete'){
 				//using $http.delete() throws a parse error in IE8, use $http['delete'] instead
-				$http['delete']('http://zeisgroupdevelopment.com/api/groups/' + $scope.group.id ).success(function(){
+				$http['delete']( apiUrl + '/groups/' + $scope.group.id ).success(function(){
 					$location.url('/groups');
 				})
 				.error(function(data){
@@ -261,7 +267,7 @@ angular.module('m2AdminApp')
 })
 .controller('CreateGroupCtrl', function($scope, $http, $routeParams, $log, $location){
 
-	$http.get('http://zeisgroupdevelopment.com/api/tpas')
+	$http.get( apiUrl + '/tpas')
 		.success(function(data){
 			$scope.tpas = data;
 		})
@@ -270,7 +276,7 @@ angular.module('m2AdminApp')
 		});
 
 	$scope.submitCreateGroup = function(group){
-		$http.post('http://zeisgroupdevelopment.com/api/groups/new', group)
+		$http.post( apiUrl + '/groups/new', group)
 			.success(function(data){
 				$log.info('Saved ', data);
 				$location.url('/groups');
@@ -283,7 +289,7 @@ angular.module('m2AdminApp')
 })
 .controller('ProductsCtrl', function($scope, $http, $routeParams, $log){
 	
-	$http.get('http://zeisgroupdevelopment.com/api/products')
+	$http.get( apiUrl + '/products')
 	.success(function(data){
 		$scope.products = data;
 	})
@@ -294,14 +300,14 @@ angular.module('m2AdminApp')
 })
 .controller('ProductCtrl', function($scope, $http, $routeParams, $log, $location, $modal){
 
-	$http.get('http://zeisgroupdevelopment.com/api/products/' + $routeParams.productShortName)
+	$http.get( apiUrl + '/products/' + $routeParams.productShortName)
 		.success(function(data){
 			$scope.product = data;
 		});
 
 	$scope.saveProduct = function(product){
 
-		$http.put('http://zeisgroupdevelopment.com/api/products', product)
+		$http.put( apiUrl + '/products', product)
 			.success(function(data){
 				$log.info('Saved ', data);
 				$location.url('/products');
@@ -326,7 +332,7 @@ angular.module('m2AdminApp')
 		modalInstance.result.then(function (deleteVerify){
 			if(deleteVerify === 'delete'){
 				//using $http.delete() throws a parse error in IE8, use $http['delete'] instead
-				$http['delete']('http://zeisgroupdevelopment.com/api/products/' + $scope.product.id )
+				$http['delete']( apiUrl + '/products/' + $scope.product.id )
 					.success(function(){
 						$location.url('/products');
 					})
@@ -359,7 +365,7 @@ angular.module('m2AdminApp')
 
 		$log.info(product);
 
-		$http.post('http://zeisgroupdevelopment.com/api/products/new', product)
+		$http.post( apiUrl + '/products/new', product)
 			.success(function(data){
 				$log.info('Saved ', data);
 				$location.url('/products');
@@ -373,26 +379,26 @@ angular.module('m2AdminApp')
 })
 .controller('UsersCtrl', function($scope, $http){
 	
-	$http.get('http://zeisgroupdevelopment.com/api/users').success(function(data){
+	$http.get( apiUrl + '/users').success(function(data){
 		$scope.users = data;
 	});
 	
 })
 .controller('UserCtrl', function($scope, $http, $routeParams, $log, $location, $modal){
 	
-	$http.get('http://zeisgroupdevelopment.com/api/users/' + $routeParams.username)
+	$http.get( apiUrl + '/users/' + $routeParams.username)
 		.success(function(data){
 			$scope.user = data;
 		});
 
-	$http.get('http://zeisgroupdevelopment.com/api/userRoles')
+	$http.get( apiUrl + '/userRoles')
 		.success(function(data){
 			$scope.roles = data;
 		});
 
 	$scope.saveUser = function(user){
 
-		$http.put('http://zeisgroupdevelopment.com/api/users', user)
+		$http.put( apiUrl + '/users', user)
 			.success(function(data){
 				$log.info('Saved ', data);
 				$location.url('/users');
@@ -417,7 +423,7 @@ angular.module('m2AdminApp')
 		modalInstance.result.then(function (deleteVerify){
 			if(deleteVerify === 'delete'){
 				//using $http.delete() throws a parse error in IE8, use $http['delete'] instead
-				$http['delete']('http://zeisgroupdevelopment.com/api/users/' + $scope.user.id )
+				$http['delete']( apiUrl + '/users/' + $scope.user.id )
 				.success(function(){
 					$location.url('/users');
 				})
@@ -445,7 +451,7 @@ angular.module('m2AdminApp')
 })
 .controller('CreateUserCtrl', function($scope, $http, $routeParams, $log, $location){
 
-	$http.get('http://zeisgroupdevelopment.com/api/userRoles')
+	$http.get( apiUrl + '/userRoles')
 		.success(function(data){
 			$scope.roles = data;
 		})
@@ -455,7 +461,7 @@ angular.module('m2AdminApp')
 
 	$scope.submitCreateUser = function(user){
 
-		$http.post('http://zeisgroupdevelopment.com/api/users/new', user)
+		$http.post( apiUrl + '/users/new', user)
 			.success(function(data){
 				$log.info('Saved ', data);
 				$location.url('/users');
