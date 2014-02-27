@@ -103,7 +103,7 @@ angular.module('m2AdminApp', [
       }
 
       if($rootScope.currentUser.username){
-        $http.post('http://zeisgroupdevelopment.com/api/users/check', $rootScope.currentUser)
+        $http.post('/api/users/check', $rootScope.currentUser)
           .success(function(data){
             if(data.status !== "success"){
               if(data.error == 1){
@@ -126,7 +126,7 @@ angular.module('m2AdminApp', [
               $rootScope.currentUser.role = parseInt(data.role);
               $rootScope.currentUser.isLoggedIn = true;
               if($location.path() === "/login"){
-                $location.url("/campaigns");                
+                $location.url("/campaigns");
               }
               return true;
             }
@@ -147,8 +147,4 @@ angular.module('m2AdminApp', [
     }
 
     $rootScope.$on('$routeChangeStart', checkLogin);
-  
   });
-
-
-
