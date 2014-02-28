@@ -30,7 +30,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading"><h3 class="panel-title">General</h3></div>
 			<div class="panel-body">
-	
+
 				<div class="form-group">
 					<label for="jobNumber" class="col-lg-4 control-label">Job Number</label>
 					<div class="col-lg-8">
@@ -114,7 +114,7 @@
 					<div class="col-lg-8">
 						<input type="text" name="segmentio-id" id="segmentio-id" class="form-control" ng-model="campaign.segmentioID">
 					</div>
-				</div>	
+				</div>
 				<div class="form-group">
 					<p class="col-lg-4 control-label"><strong>Approved by Compliance?</strong></p>
 					<div class="col-lg-8">
@@ -155,7 +155,7 @@
 						<input type="text" name="calc-html" id="calc-html" class="form-control" ng-model="campaign.calcHtml">
 					</div>
 				</div>
-				
+
 				<div class="form-group">
 					<label for="homepage-content" class="col-lg-4 control-label">Homepage content, if there is no calculator</label>
 					<div class="col-lg-8">
@@ -169,14 +169,38 @@
 
 		<div class="panel panel-default">
 			<div class="panel-heading"><h3 class="panel-title">Content</h3></div>
-			<div class="panel-body"> 
+			<div class="panel-body">
 
 				<div class="form-group">
 					<label for="leadin-copy" class="col-lg-4 control-label">Lead-in Copy</label>
 					<div class="col-lg-8 input-group">
 						<input type="text" name="leadin-copy" id="leadin-copy" class="form-control" ng-model="campaign.leadInCopy">
 					</div>
-				</div>  
+				</div>
+        <div class="form-group">
+          <label for="fname-personalized" class="col-lg-4 control-label">First Name Copy (Personalized)</label>
+          <div class="col-lg-8 input-group">
+            <input type="text" name="fname-personalized" id="fname-personalized" class="form-control" ng-model="campaign.fnamePersonalized">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="fname-non-personalized" class="col-lg-4 control-label">First Name Copy (Non Personalized)</label>
+          <div class="col-lg-8 input-group">
+            <input type="text" name="fname-personalized" id="fname-personalized" class="form-control" ng-model="campaign.fnameNonPersonalized">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="lname-personalized" class="col-lg-4 control-label">Last Name Copy (Personalized)</label>
+          <div class="col-lg-8 input-group">
+            <input type="text" name="lname-personalized" id="lname-personalized" class="form-control" ng-model="campaign.lnamePersonalized">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="lname-non-personalized" class="col-lg-4 control-label">Last Name Copy (Non Personalized)</label>
+          <div class="col-lg-8 input-group">
+            <input type="text" name="lname-personalized" id="lname-personalized" class="form-control" ng-model="campaign.lnameNonPersonalized">
+          </div>
+        </div>
 				<!--
 				<div class="form-group">
 					<label for="video-html" class="col-lg-4 control-label">Video HTML</label>
@@ -197,7 +221,7 @@
 						<span class="input-group-addon">pdfs/</span>
 						<input type="text" name="pdf-overview-src" id="pdf-overview-src" class="form-control" ng-model="campaign.coverageOverviewPDF">
 					</div>
-				</div> 
+				</div>
 				<div class="form-group">
 					<label for="overview-content" class="col-lg-4 control-label">Overview Content</label>
 					<div class="col-lg-8 input-group">
@@ -211,33 +235,33 @@
 						<!-- <textarea ck-editor id="faq-content" name="faq-content" ng-model="campaign.faqContentHtml"></textarea> -->
 						<div text-angular id="faq-content" name="faq-content" ng-model="campaign.faqContentHtml"></div>
 					</div>
-				</div> 
+				</div>
 				<div class="form-group">
 					<label for="howtoapply-content" class="col-lg-4 control-label">How to Apply Content</label>
 					<div class="col-lg-8 input-group">
 						<!-- <textarea ck-editor id="howtoapply-content" name="howtoapply-content" ng-model="campaign.howtoapplyContentHtml"></textarea> -->
 						<div text-angular id="howtoapply-content" name="howtoapply-content" ng-model="campaign.howToApplyContentHtml"></div>
 					</div>
-				</div>  
+				</div>
 				<div class="form-group">
 					<label for="footer-content" class="col-lg-4 control-label">Footer Content</label>
 					<div class="col-lg-8 input-group">
 						<div text-angular text-angular-name="footer-content-editor" id="footer-content" name="footer-content" rows="10" cols="80" ng-model="campaign.footerHtml"></div>
 					</div>
-				</div>     
+				</div>
 				<div class="form-group">
 					<label for="endorse-image-src" class="col-lg-4 control-label">Third-party Image</label>
 					<div class="col-lg-8 input-group">
 						<span class="input-group-addon">images/</span>
 						<input type="text" name="endorse-image-src" id="endorse-image-src" class="form-control" ng-model="campaign.thirdPartyEndorseImage">
 					</div>
-				</div>   
+				</div>
 				<div class="form-group">
 					<label for="endorse-text" class="col-lg-4 control-label">Third-party Copy</label>
 					<div class="col-lg-8 input-group">
 						<input type="text" name="endorse-text" id="endorse-text" class="form-control" ng-model="campaign.thirdPartyEndorseText">
 					</div>
-				</div>        
+				</div>
 
 
 			</div>
@@ -254,7 +278,7 @@
 						<span class="input-group-addon">images/main-images/</span>
 						<input type="text" name="main-image-src" id="main-image-src" class="form-control" ng-model="campaign.mainImage">
 					</div>
-				</div>  
+				</div>
 
 				<div class="form-group">
 					<label for="main-campaign-color" class="col-lg-4 control-label">Main Campaign Color</label>
@@ -264,7 +288,7 @@
 					<div class="col-lg-6">
 						<input type="text" name="main-campaign-color" id="main-campaign-color" class="form-control" value="#666666" ng-model="campaign.mainCampaignColor">
 					</div>
-				</div>  
+				</div>
 
 				<div class="form-group">
 					<label for="nav-font-color" class="col-lg-4 control-label">Nav Font Color</label>
@@ -274,7 +298,7 @@
 					<div class="col-lg-6">
 						<input type="text" name="nav-font-color" id="nav-font-color" class="form-control" value="#666666" ng-model="campaign.navFontColor">
 					</div>
-				</div>  
+				</div>
 
 				<div class="form-group">
 					<label for="nav-brdr-lt-color" class="col-lg-4 control-label">Nav Border Light Color</label>
@@ -284,7 +308,7 @@
 					<div class="col-lg-6">
 						<input type="text" name="nav-brdr-lt-color" id="nav-brdr-lt-color" class="form-control" value="#666666" ng-model="campaign.navBorderLightColor">
 					</div>
-				</div>  
+				</div>
 
 				<div class="form-group">
 					<label for="nav-brdr-dk-color" class="col-lg-4 control-label">Nav Border Dark Color</label>
@@ -294,7 +318,7 @@
 					<div class="col-lg-6">
 						<input type="text" name="nav-brdr-dk-color" id="nav-brdr-dk-color" class="form-control" value="#666666" ng-model="campaign.navBorderDarkColor">
 					</div>
-				</div>  
+				</div>
 
 				<div class="form-group">
 					<label for="nav-hover-bg-color" class="col-lg-4 control-label">Nav Hover Color</label>
@@ -304,7 +328,7 @@
 					<div class="col-lg-6">
 						<input type="text" name="nav-hover-bg-color" id="nav-hover-bg-color" class="form-control" value="#666666" ng-model="campaign.navHoverColor">
 					</div>
-				</div>  
+				</div>
 
 				<div class="form-group">
 					<label for="nav-hover-font-color" class="col-lg-4 control-label">Nav Hover Font Color</label>
@@ -314,7 +338,7 @@
 					<div class="col-lg-6">
 						<input type="text" name="nav-hover-font-color" id="nav-hover-font-color" class="form-control" value="#666666" ng-model="campaign.navHoverFontColor">
 					</div>
-				</div>  
+				</div>
 
 				<div class="form-group">
 					<label for="nav-hover-brdr-lt-color" class="col-lg-4 control-label">Nav Hover Border Light Color</label>
@@ -324,7 +348,7 @@
 					<div class="col-lg-6">
 						<input type="text" name="nav-hover-brdr-lt-color" id="nav-hover-brdr-lt-color" class="form-control" value="#666666" ng-model="campaign.navHoverBorderLightColor">
 					</div>
-				</div>  
+				</div>
 
 				<div class="form-group">
 					<label for="nav-hover-brdr-dk-color" class="col-lg-4 control-label">Nav Hover Border Dark Color</label>
@@ -334,7 +358,7 @@
 					<div class="col-lg-6">
 						<input type="text" name="nav-hover-brdr-dk-color" id="nav-hover-brdr-dk-color" class="form-control" value="#666666" ng-model="campaign.navHoverBorderDarkColor">
 					</div>
-				</div>  
+				</div>
 
 
 			</div>
