@@ -23,7 +23,6 @@
         <h2>Edit Group</h2>
     </div>
 
-
     <form class="form-horizontal" role="form" ng-submit="saveGroup(group)">
 
         <div class="panel panel-default">
@@ -96,14 +95,14 @@
                 <div class="form-group">
                     <label for="target" class="col-lg-4 control-label">Target</label>
                     <div class="col-lg-8">
-                        <input type="text" name="target" id="target" class="form-control" ng-model="group.target" ng-required="true">
+                        <input type="text" name="target" id="target" class="form-control" ng-model="group.target">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="targetPlural" class="col-lg-4 control-label">Target Plural</label>
                     <div class="col-lg-8">
-                        <input type="text" name="targetPlural" id="targetPlural" class="form-control" ng-model="group.targetPlural" ng-required="true">
+                        <input type="text" name="targetPlural" id="targetPlural" class="form-control" ng-model="group.targetPlural">
                     </div>
                 </div>
 

@@ -103,7 +103,7 @@ angular.module('m2AdminApp', [
       }
 
       if($rootScope.currentUser.username){
-        $http.post('http://zeisgroupdevelopment.com/api/users/check', $rootScope.currentUser)
+        $http.post('/api/users/check', $rootScope.currentUser)
           .success(function(data){
             if(data.status !== "success"){
               if(data.error == 1){
