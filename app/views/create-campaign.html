@@ -1,364 +1,370 @@
 <div class="header">
-	<div class="pull-right">
-		<strong>{{ currentUser.username | capitalize }}</strong>&nbsp;&nbsp;&nbsp;<a href="#" ng-click="logout()">Logout <i class="glyphicon glyphicon-log-out"></i></a>
-	</div>
-	<img src="images/index-tech.png" class="logo">
-	<h1>Microsite Administration</h1>
-	<h4>Version 2.0</h4>
-	<ul class="nav nav-tabs">
-		<li class="active"><a href="#/campaigns">Manage Campaigns</a></li>
-		<li><a href="#/groups">Manage Groups</a></li>
-		<li><a href="#/products">Manage Products</a></li>
-		<li ng-show="currentUser.role == 1"><a href="#/users">Manage Users</a></li>
-	</ul>
+  <div class="pull-right">
+    <strong>{{ currentUser.username | capitalize }}</strong>&nbsp;&nbsp;&nbsp;<a href="#" ng-click="logout()">Logout <i class="glyphicon glyphicon-log-out"></i></a>
+  </div>
+  <img src="images/index-tech.png" class="logo">
+  <h1>Microsite Administration</h1>
+  <h4>Version 2.0</h4>
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#/campaigns">Manage Campaigns</a></li>
+    <li><a href="#/groups">Manage Groups</a></li>
+    <li><a href="#/products">Manage Products</a></li>
+    <li ng-show="currentUser.role == 1"><a href="#/users">Manage Users</a></li>
+  </ul>
 </div>
 
 <div>
-	<a ng-href="#/campaigns">
-		<span class="glyphicon glyphicon-arrow-left"></span>
-		Back to Campaigns
-	</a>
-	<div class="page-header">
-		<h2>Create a New Campaign</h2>
-	</div>
+  <a ng-href="#/campaigns">
+    <span class="glyphicon glyphicon-arrow-left"></span>
+    Back to Campaigns
+  </a>
+  <div class="page-header">
+    <h2>Create a New Campaign</h2>
+  </div>
 
-	<form class="form-horizontal" role="form" ng-submit="submitCreateCampaign(campaign)">
+  <form class="form-horizontal" role="form" ng-submit="submitCreateCampaign(campaign)">
 
-		<div class="panel panel-default">
-			<div class="panel-heading"><h3 class="panel-title">General</h3></div>
-			<div class="panel-body">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3 class="panel-title">General</h3></div>
+      <div class="panel-body">
 
-				<div class="form-group">
-					<label for="jobNumber" class="col-lg-4 control-label">Job Number</label>
-					<div class="col-lg-8">
-						<input type="text" name="jobNumber" id="jobNumber" class="form-control" ng-model="campaign.jobNumber" ng-change="syncJobNumber()">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="shortName" class="col-lg-4 control-label">Short Name (for URL)</label>
-					<div class="col-lg-8">
-						<label class="control-label" ng-bind="campaign.shortName"></label>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="group" class="col-lg-4 control-label">Group</label>
-					<div class="col-lg-8">
-						<select name="group" id="group" class="form-control" ng-model="campaign.group.id" ng-options="group.id as group.name for group in groups">
-							<option value="">-- choose group --</option>
-						</select>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="product" class="col-lg-4 control-label">Product</label>
-					<div class="col-lg-8">
-						<select name="product" id="product" class="form-control" ng-model="campaign.product.id" ng-options="product.id as product.name for product in products">
-							<option value="">-- choose product --</option>
-						</select>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="description" class="col-lg-4 control-label">Description</label>
-					<div class="col-lg-8">
-						<input type="text" name="description" id="description" class="form-control" ng-model="campaign.description">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="notes" class="col-lg-4 control-label">Notes</label>
-					<div class="col-lg-8">
-						<textarea id="notes" name="notes" class="form-control" rows="3" ng-model="campaign.notes"></textarea>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="eenroll" class="col-lg-4 control-label">Enrollment Method:</label>
-					<div class="col-lg-8 input-group">
-						<div class="enrollment-switch">
-							<input type="radio" ng-model="campaign.eEnroll" value="1"> eEnroll <br/>
-							<input type="radio" ng-model="campaign.eEnroll" value="0"> Downloadable PDF <br/>
-						</div>
-					</div>
-				</div>
-				<div class="form-group" ng-if="campaign.eEnroll">
-					<label for="enrollment-link" class="col-lg-4 control-label">Enrollment Link:</label>
-					<div class="col-lg-8 input-group">
-						<input type="text" name="enrollment-link" id="enrollment-link" class="form-control" ng-model="campaign.enrollmentLink">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="guaranteedIssue" class="col-lg-4 control-label">Guaranteed Issue? (Enroll vs Apply):</label>
-					<div class="col-lg-8 input-group">
-						<label class="radio-inline">
-							<input type="radio" name="guaranteedIssue" id="guaranteedIssue-1" value="1" ng-model="campaign.guaranteedIssue">
-							Yes
-						</label>
-						<label class="radio-inline">
-							<input type="radio" name="guaranteedIssue" id="guaranteedIssue-0" value="0" ng-model="campaign.guaranteedIssue" ng-checked="true">
-							No
-						</label>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="medExamRequired" class="col-lg-4 control-label">Display Medical Exam Language?:</label>
-					<div class="col-lg-8 input-group">
-						<input type="radio" ng-model="campaign.medExamRequired" value="0" ng-checked="true"> None <br/>
-						<input type="radio" ng-model="campaign.medExamRequired" value="1"> No medical exam typically required <br/>
-						<input type="radio" ng-model="campaign.medExamRequired" value="2"> Approval Guaranteed <br/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="segmentio-id" class="col-lg-4 control-label">Segment.io ID</label>
-					<div class="col-lg-8">
-						<input type="text" name="segmentio-id" id="segmentio-id" class="form-control" ng-model="campaign.segmentioID">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="compliance-code" class="col-lg-4 control-label">Compliance Code</label>
-					<div class="col-lg-8">
-						<input type="text" name="complianceCode" id="complianceCode" class="form-control" ng-model="campaign.complianceCode">
-					</div>
-				</div>
-				<div class="form-group">
-					<p class="col-lg-4 control-label"><strong>Approved by Compliance?</strong></p>
-					<div class="col-lg-8">
-						<label class="radio-inline">
-							<input type="radio" name="compliance-approved" id="compliance-approved-1" value="1" ng-model="campaign.complianceApproval">
-							Yes
-						</label>
-						<label class="radio-inline">
-							<input type="radio" name="compliance-approved" id="compliance-approved-0" value="0" ng-model="campaign.complianceApproval" ng-checked="true">
-							No
-						</label>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="panel panel-default">
-			<div class="panel-heading"><h3 class="panel-title">Homepage</h3></div>
-			<div class="panel-body">
-
-				<div class="form-group">
-					<p  class="col-lg-4 control-label"><strong>Is there a calculator?</strong></p>
-					<div class="col-lg-8">
-						<label class="radio-inline">
-							<input type="radio" name="calculator" id="calculator-1" value="1" ng-model="campaign.hasCalc">
-							Yes
-						</label>
-						<label class="radio-inline">
-							<input type="radio" name="calculator" id="calculator-0" value="0" ng-model="campaign.hasCalc">
-							No
-						</label>
-					</div>
-				</div>
-				<div class="form-group" ng-if="campaign.hasCalc">
-					<label for="calc-html" class="col-lg-4 control-label">Calculator HTML</label>
-					<div class="col-lg-8 input-group">
-						<span class="input-group-addon">calculators/</span>
-						<input type="text" name="calc-html" id="calc-html" class="form-control" ng-model="campaign.calcHtml">
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label for="homepage-content" class="col-lg-4 control-label">Homepage content, if there is no calculator</label>
-					<div class="col-lg-8">
-						<div text-angular text-angular-name="homepage-content-creator" id="homepage-content" name="homepage-content" rows="10" cols="80" ng-model="campaign.homepageContentHtml"></div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-
-		<div class="panel panel-default">
-			<div class="panel-heading"><h3 class="panel-title">Content</h3></div>
-			<div class="panel-body">
-
-				<div class="form-group">
-					<label for="leadin-copy" class="col-lg-4 control-label">Lead-in Copy</label>
-					<div class="col-lg-8 input-group">
-						<input type="text" name="leadin-copy" id="leadin-copy" class="form-control" ng-model="campaign.leadInCopy">
-					</div>
-				</div>
         <div class="form-group">
+          <label for="jobNumber" class="col-lg-4 control-label">Job Number</label>
+          <div class="col-lg-8">
+            <input type="text" name="jobNumber" id="jobNumber" class="form-control" ng-model="campaign.jobNumber" ng-change="syncJobNumber()">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="shortName" class="col-lg-4 control-label">Short Name (for URL)</label>
+          <div class="col-lg-8">
+            <label class="control-label" ng-bind="campaign.shortName"></label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="group" class="col-lg-4 control-label">Group</label>
+          <div class="col-lg-8">
+            <select name="group" id="group" class="form-control" ng-model="campaign.group.id" ng-options="group.id as group.name for group in groups">
+              <option value="">-- choose group --</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="product" class="col-lg-4 control-label">Product</label>
+          <div class="col-lg-8">
+            <select name="product" id="product" class="form-control" ng-model="campaign.product.id" ng-options="product.id as product.name for product in products">
+              <option value="">-- choose product --</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="description" class="col-lg-4 control-label">Description</label>
+          <div class="col-lg-8">
+            <input type="text" name="description" id="description" class="form-control" ng-model="campaign.description">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="notes" class="col-lg-4 control-label">Notes</label>
+          <div class="col-lg-8">
+            <textarea id="notes" name="notes" class="form-control" rows="3" ng-model="campaign.notes"></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="eenroll" class="col-lg-4 control-label">Enrollment Method:</label>
+          <div class="col-lg-8 input-group">
+            <div class="enrollment-switch">
+              <input type="radio" ng-model="campaign.eEnroll" value="1"> eEnroll <br/>
+              <input type="radio" ng-model="campaign.eEnroll" value="0"> Downloadable PDF <br/>
+            </div>
+          </div>
+        </div>
+        <div class="form-group" ng-if="campaign.eEnroll">
+          <label for="enrollment-link" class="col-lg-4 control-label">Enrollment Link:</label>
+          <div class="col-lg-8 input-group">
+            <input type="text" name="enrollment-link" id="enrollment-link" class="form-control" ng-model="campaign.enrollmentLink">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="guaranteedIssue" class="col-lg-4 control-label">Guaranteed Issue? (Enroll vs Apply):</label>
+          <div class="col-lg-8 input-group">
+            <label class="radio-inline">
+              <input type="radio" name="guaranteedIssue" id="guaranteedIssue-1" value="1" ng-model="campaign.guaranteedIssue">
+              Yes
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="guaranteedIssue" id="guaranteedIssue-0" value="0" ng-model="campaign.guaranteedIssue" ng-checked="true">
+              No
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="medExamRequired" class="col-lg-4 control-label">Display Medical Exam Language?:</label>
+          <div class="col-lg-8 input-group">
+            <input type="radio" ng-model="campaign.medExamRequired" value="0" ng-checked="true"> None <br/>
+            <input type="radio" ng-model="campaign.medExamRequired" value="1"> No medical exam typically required <br/>
+            <input type="radio" ng-model="campaign.medExamRequired" value="2"> Approval Guaranteed <br/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="segmentio-id" class="col-lg-4 control-label">Segment.io ID</label>
+          <div class="col-lg-8">
+            <input type="text" name="segmentio-id" id="segmentio-id" class="form-control" ng-model="campaign.segmentioID">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="compliance-code" class="col-lg-4 control-label">Compliance Code</label>
+          <div class="col-lg-8">
+            <input type="text" name="complianceCode" id="complianceCode" class="form-control" ng-model="campaign.complianceCode">
+          </div>
+        </div>
+        <div class="form-group">
+          <p class="col-lg-4 control-label"><strong>Approved by Compliance?</strong></p>
+          <div class="col-lg-8">
+            <label class="radio-inline">
+              <input type="radio" name="compliance-approved" id="compliance-approved-1" value="1" ng-model="campaign.complianceApproval">
+              Yes
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="compliance-approved" id="compliance-approved-0" value="0" ng-model="campaign.complianceApproval" ng-checked="true">
+              No
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3 class="panel-title">Homepage</h3></div>
+      <div class="panel-body">
+
+        <div class="form-group">
+          <p  class="col-lg-4 control-label"><strong>Is there a calculator?</strong></p>
+          <div class="col-lg-8">
+            <label class="radio-inline">
+              <input type="radio" name="calculator" id="calculator-1" value="1" ng-model="campaign.hasCalc">
+              Yes
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="calculator" id="calculator-0" value="0" ng-model="campaign.hasCalc">
+              No
+            </label>
+          </div>
+        </div>
+        <div class="form-group" ng-if="campaign.hasCalc">
+          <label for="calc-html" class="col-lg-4 control-label">Calculator HTML</label>
+          <div class="col-lg-8 input-group">
+            <span class="input-group-addon">calculators/</span>
+            <input type="text" name="calc-html" id="calc-html" class="form-control" ng-model="campaign.calcHtml">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="homepage-content" class="col-lg-4 control-label">Homepage content, if there is no calculator</label>
+          <div class="col-lg-8">
+            <div text-angular text-angular-name="homepage-content-creator" id="homepage-content" name="homepage-content" rows="10" cols="80" ng-model="campaign.homepageContentHtml"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3 class="panel-title">Content</h3></div>
+      <div class="panel-body">
+
+        <div class="form-group">
+          <label for="leadin-copy" class="col-lg-4 control-label">Lead-in Copy</label>
+          <div class="col-lg-8 input-group">
+            <input type="text" name="leadin-copy" id="leadin-copy" class="form-control" ng-model="campaign.leadInCopy">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="leadin-copy-personalized" class="col-lg-4 control-label">Lead-in Copy Personalized</label>
+          <div class="col-lg-8 input-group">
+            <input type="text" name="leadin-copy-personalized" id="leadin-copy-personalized" class="form-control" ng-model="campaign.leadInCopyPersonalized">
+          </div>
+        </div>
+        <div class="form-group" style="display: none;">
           <label for="fname-personalized" class="col-lg-4 control-label">First Name Copy (Personalized)</label>
           <div class="col-lg-8 input-group">
-            <input type="text" name="fname-personalized" id="fname-personalized" class="form-control" ng-model="campaign.fnamePersonalized">
+            <input type="hidden" name="fname-personalized" id="fname-personalized" class="form-control" ng-model="campaign.fnamePersonalized">
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="display: none;">
           <label for="fname-non-personalized" class="col-lg-4 control-label">First Name Copy (Non Personalized)</label>
           <div class="col-lg-8 input-group">
-            <input type="text" name="fname-personalized" id="fname-personalized" class="form-control" ng-model="campaign.fnameNonPersonalized">
+            <input type="hidden" name="fname-personalized" id="fname-personalized" class="form-control" ng-model="campaign.fnameNonPersonalized">
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="display: none;">
           <label for="lname-personalized" class="col-lg-4 control-label">Last Name Copy (Personalized)</label>
           <div class="col-lg-8 input-group">
-            <input type="text" name="lname-personalized" id="lname-personalized" class="form-control" ng-model="campaign.lnamePersonalized">
+            <input type="hidden" name="lname-personalized" id="lname-personalized" class="form-control" ng-model="campaign.lnamePersonalized">
+          </div>
+        </div>
+        <div class="form-group" style="display: none;">
+          <label for="lname-non-personalized" class="col-lg-4 control-label">Last Name Copy (Non Personalized)</label>
+          <div class="col-lg-8 input-group">
+            <input type="hidden" name="lname-personalized" id="lname-personalized" class="form-control" ng-model="campaign.lnameNonPersonalized">
+          </div>
+        </div>
+        <!--
+        <div class="form-group">
+          <label for="video-html" class="col-lg-4 control-label">Video HTML</label>
+          <div class="col-lg-8 input-group">
+            <input type="text" name="video-html" id="video-html" class="form-control" ng-model="campaign.videoHtml">
+          </div>
+        </div>
+        -->
+        <div class="form-group">
+          <label for="video-headline" class="col-lg-4 control-label">Video Headline</label>
+          <div class="col-lg-8 input-group">
+            <input type="text" name="video-headline" id="video-headline" class="form-control" ng-model="campaign.videoHeadline">
           </div>
         </div>
         <div class="form-group">
-          <label for="lname-non-personalized" class="col-lg-4 control-label">Last Name Copy (Non Personalized)</label>
+          <label for="pdf-overview-src" class="col-lg-4 control-label">Overview PDF</label>
           <div class="col-lg-8 input-group">
-            <input type="text" name="lname-personalized" id="lname-personalized" class="form-control" ng-model="campaign.lnameNonPersonalized">
+            <span class="input-group-addon">pdfs/</span>
+            <input type="text" name="pdf-overview-src" id="pdf-overview-src" class="form-control" ng-model="campaign.coverageOverviewPDF">
           </div>
         </div>
-				<!--
-				<div class="form-group">
-					<label for="video-html" class="col-lg-4 control-label">Video HTML</label>
-					<div class="col-lg-8 input-group">
-						<input type="text" name="video-html" id="video-html" class="form-control" ng-model="campaign.videoHtml">
-					</div>
-				</div>
-				-->
-				<div class="form-group">
-					<label for="video-headline" class="col-lg-4 control-label">Video Headline</label>
-					<div class="col-lg-8 input-group">
-						<input type="text" name="video-headline" id="video-headline" class="form-control" ng-model="campaign.videoHeadline">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="pdf-overview-src" class="col-lg-4 control-label">Overview PDF</label>
-					<div class="col-lg-8 input-group">
-						<span class="input-group-addon">pdfs/</span>
-						<input type="text" name="pdf-overview-src" id="pdf-overview-src" class="form-control" ng-model="campaign.coverageOverviewPDF">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="overview-content" class="col-lg-4 control-label">Overview Content</label>
-					<div class="col-lg-8 input-group">
-						<div text-angular text-angular-name="overview-content-creator" id="overview-content" name="overview-content" rows="10" cols="80" ng-model="campaign.coverageOverviewHtml" ></div>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="faq-content" class="col-lg-4 control-label">FAQ Content</label>
-					<div class="col-lg-8 input-group">
-						<div text-angular text-angular-name="faq-content-creator" id="faq-content" name="faq-content" rows="10" cols="80" ng-model="campaign.faqContentHtml"></div>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="howtoapply-content" class="col-lg-4 control-label">How to Apply Content</label>
-					<div class="col-lg-8 input-group">
-						<div text-angular text-angular-name="howtoapply-content-creator" id="howtoapply-content" name="howToApply-content" rows="10" cols="80" ng-model="campaign.howToApplyContentHtml"></div>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="footer-content" class="col-lg-4 control-label">Footer Content</label>
-					<div class="col-lg-8 input-group">
-						<div text-angular text-angular-name="footer-content-creator" id="footer-content" name="footer-content" rows="10" cols="80" ng-model="campaign.footerHtml"></div>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="endorse-image-src" class="col-lg-4 control-label">Third-party Image</label>
-					<div class="col-lg-8 input-group">
-						<span class="input-group-addon">images/</span>
-						<input type="text" name="endorse-image-src" id="endorse-image-src" class="form-control" ng-model="campaign.thirdPartyEndorseImage">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="endorse-text" class="col-lg-4 control-label">Third-party Copy</label>
-					<div class="col-lg-8 input-group">
-						<input type="text" name="endorse-text" id="endorse-text" class="form-control" ng-model="campaign.thirdPartyEndorseText">
-					</div>
-				</div>
+        <div class="form-group">
+          <label for="overview-content" class="col-lg-4 control-label">Overview Content</label>
+          <div class="col-lg-8 input-group">
+            <div text-angular text-angular-name="overview-content-creator" id="overview-content" name="overview-content" rows="10" cols="80" ng-model="campaign.coverageOverviewHtml" ></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="faq-content" class="col-lg-4 control-label">FAQ Content</label>
+          <div class="col-lg-8 input-group">
+            <div text-angular text-angular-name="faq-content-creator" id="faq-content" name="faq-content" rows="10" cols="80" ng-model="campaign.faqContentHtml"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="howtoapply-content" class="col-lg-4 control-label">How to Apply Content</label>
+          <div class="col-lg-8 input-group">
+            <div text-angular text-angular-name="howtoapply-content-creator" id="howtoapply-content" name="howToApply-content" rows="10" cols="80" ng-model="campaign.howToApplyContentHtml"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="footer-content" class="col-lg-4 control-label">Footer Content</label>
+          <div class="col-lg-8 input-group">
+            <div text-angular text-angular-name="footer-content-creator" id="footer-content" name="footer-content" rows="10" cols="80" ng-model="campaign.footerHtml"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="endorse-image-src" class="col-lg-4 control-label">Third-party Image</label>
+          <div class="col-lg-8 input-group">
+            <span class="input-group-addon">images/</span>
+            <input type="text" name="endorse-image-src" id="endorse-image-src" class="form-control" ng-model="campaign.thirdPartyEndorseImage">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="endorse-text" class="col-lg-4 control-label">Third-party Copy</label>
+          <div class="col-lg-8 input-group">
+            <input type="text" name="endorse-text" id="endorse-text" class="form-control" ng-model="campaign.thirdPartyEndorseText">
+          </div>
+        </div>
 
 
-			</div>
-		</div>
+      </div>
+    </div>
 
-		<!-- <div class="panel panel-default">
-			<div class="panel-heading"><h3 class="panel-title">Design</h3></div>
-			<div class="panel-body">
+    <!-- <div class="panel panel-default">
+      <div class="panel-heading"><h3 class="panel-title">Design</h3></div>
+      <div class="panel-body">
 
-				<div class="form-group">
-					<label for="main-image-src" class="col-lg-4 control-label">Main Image Source</label>
-					<div class="col-lg-8 input-group">
-						<span class="input-group-addon">images/main-images/</span>
-						<input type="text" name="main-image-src" id="main-image-src" class="form-control" ng-model="campaign.mainImage">
-					</div>
-				</div>
+        <div class="form-group">
+          <label for="main-image-src" class="col-lg-4 control-label">Main Image Source</label>
+          <div class="col-lg-8 input-group">
+            <span class="input-group-addon">images/main-images/</span>
+            <input type="text" name="main-image-src" id="main-image-src" class="form-control" ng-model="campaign.mainImage">
+          </div>
+        </div>
 
-				<div class="form-group">
-					<label for="main-campaign-color" class="col-lg-4 control-label">Main Campaign Color</label>
-					<div class="col-lg-2">
-						<input type="color" name="main-campaign-color" class="form-control" value="#666666" ng-model="campaign.mainCampaignColor">
-					</div>
-					<div class="col-lg-6">
-						<input type="text" name="main-campaign-color" id="main-campaign-color" class="form-control" value="#666666" ng-model="campaign.mainCampaignColor">
-					</div>
-				</div>
+        <div class="form-group">
+          <label for="main-campaign-color" class="col-lg-4 control-label">Main Campaign Color</label>
+          <div class="col-lg-2">
+            <input type="color" name="main-campaign-color" class="form-control" value="#666666" ng-model="campaign.mainCampaignColor">
+          </div>
+          <div class="col-lg-6">
+            <input type="text" name="main-campaign-color" id="main-campaign-color" class="form-control" value="#666666" ng-model="campaign.mainCampaignColor">
+          </div>
+        </div>
 
-				<div class="form-group">
-					<label for="nav-font-color" class="col-lg-4 control-label">Nav Font Color</label>
-					<div class="col-lg-2">
-						<input type="color" name="nav-font-color" class="form-control" value="#666666" ng-model="campaign.navFontColor">
-					</div>
-					<div class="col-lg-6">
-						<input type="text" name="nav-font-color" id="nav-font-color" class="form-control" value="#666666" ng-model="campaign.navFontColor">
-					</div>
-				</div>
+        <div class="form-group">
+          <label for="nav-font-color" class="col-lg-4 control-label">Nav Font Color</label>
+          <div class="col-lg-2">
+            <input type="color" name="nav-font-color" class="form-control" value="#666666" ng-model="campaign.navFontColor">
+          </div>
+          <div class="col-lg-6">
+            <input type="text" name="nav-font-color" id="nav-font-color" class="form-control" value="#666666" ng-model="campaign.navFontColor">
+          </div>
+        </div>
 
-				<div class="form-group">
-					<label for="nav-brdr-lt-color" class="col-lg-4 control-label">Nav Border Light Color</label>
-					<div class="col-lg-2">
-						<input type="color" name="nav-brdr-lt-color" class="form-control" value="#666666" ng-model="campaign.navBorderLightColor">
-					</div>
-					<div class="col-lg-6">
-						<input type="text" name="nav-brdr-lt-color" id="nav-brdr-lt-color" class="form-control" value="#666666" ng-model="campaign.navBorderLightColor">
-					</div>
-				</div>
+        <div class="form-group">
+          <label for="nav-brdr-lt-color" class="col-lg-4 control-label">Nav Border Light Color</label>
+          <div class="col-lg-2">
+            <input type="color" name="nav-brdr-lt-color" class="form-control" value="#666666" ng-model="campaign.navBorderLightColor">
+          </div>
+          <div class="col-lg-6">
+            <input type="text" name="nav-brdr-lt-color" id="nav-brdr-lt-color" class="form-control" value="#666666" ng-model="campaign.navBorderLightColor">
+          </div>
+        </div>
 
-				<div class="form-group">
-					<label for="nav-brdr-dk-color" class="col-lg-4 control-label">Nav Border Dark Color</label>
-					<div class="col-lg-2">
-						<input type="color" name="nav-brdr-dk-color" class="form-control" value="#666666" ng-model="campaign.navBorderDarkColor">
-					</div>
-					<div class="col-lg-6">
-						<input type="text" name="nav-brdr-dk-color" id="nav-brdr-dk-color" class="form-control" value="#666666" ng-model="campaign.navBorderDarkColor">
-					</div>
-				</div>
+        <div class="form-group">
+          <label for="nav-brdr-dk-color" class="col-lg-4 control-label">Nav Border Dark Color</label>
+          <div class="col-lg-2">
+            <input type="color" name="nav-brdr-dk-color" class="form-control" value="#666666" ng-model="campaign.navBorderDarkColor">
+          </div>
+          <div class="col-lg-6">
+            <input type="text" name="nav-brdr-dk-color" id="nav-brdr-dk-color" class="form-control" value="#666666" ng-model="campaign.navBorderDarkColor">
+          </div>
+        </div>
 
-				<div class="form-group">
-					<label for="nav-hover-bg-color" class="col-lg-4 control-label">Nav Hover Color</label>
-					<div class="col-lg-2">
-						<input type="color" name="nav-hover-bg-color" class="form-control" value="#666666" ng-model="campaign.navHoverColor">
-					</div>
-					<div class="col-lg-6">
-						<input type="text" name="nav-hover-bg-color" id="nav-hover-bg-color" class="form-control" value="#666666" ng-model="campaign.navHoverColor">
-					</div>
-				</div>
+        <div class="form-group">
+          <label for="nav-hover-bg-color" class="col-lg-4 control-label">Nav Hover Color</label>
+          <div class="col-lg-2">
+            <input type="color" name="nav-hover-bg-color" class="form-control" value="#666666" ng-model="campaign.navHoverColor">
+          </div>
+          <div class="col-lg-6">
+            <input type="text" name="nav-hover-bg-color" id="nav-hover-bg-color" class="form-control" value="#666666" ng-model="campaign.navHoverColor">
+          </div>
+        </div>
 
-				<div class="form-group">
-					<label for="nav-hover-font-color" class="col-lg-4 control-label">Nav Hover Font Color</label>
-					<div class="col-lg-2">
-						<input type="color" name="nav-hover-font-color" class="form-control" value="#666666" ng-model="campaign.navHoverFontColor">
-					</div>
-					<div class="col-lg-6">
-						<input type="text" name="nav-hover-font-color" id="nav-hover-font-color" class="form-control" value="#666666" ng-model="campaign.navHoverFontColor">
-					</div>
-				</div>
+        <div class="form-group">
+          <label for="nav-hover-font-color" class="col-lg-4 control-label">Nav Hover Font Color</label>
+          <div class="col-lg-2">
+            <input type="color" name="nav-hover-font-color" class="form-control" value="#666666" ng-model="campaign.navHoverFontColor">
+          </div>
+          <div class="col-lg-6">
+            <input type="text" name="nav-hover-font-color" id="nav-hover-font-color" class="form-control" value="#666666" ng-model="campaign.navHoverFontColor">
+          </div>
+        </div>
 
-				<div class="form-group">
-					<label for="nav-hover-brdr-lt-color" class="col-lg-4 control-label">Nav Hover Border Light Color</label>
-					<div class="col-lg-2">
-						<input type="color" name="nav-hover-brdr-lt-color" class="form-control" value="#666666" ng-model="campaign.navHoverBorderLightColor">
-					</div>
-					<div class="col-lg-6">
-						<input type="text" name="nav-hover-brdr-lt-color" id="nav-hover-brdr-lt-color" class="form-control" value="#666666" ng-model="campaign.navHoverBorderLightColor">
-					</div>
-				</div>
+        <div class="form-group">
+          <label for="nav-hover-brdr-lt-color" class="col-lg-4 control-label">Nav Hover Border Light Color</label>
+          <div class="col-lg-2">
+            <input type="color" name="nav-hover-brdr-lt-color" class="form-control" value="#666666" ng-model="campaign.navHoverBorderLightColor">
+          </div>
+          <div class="col-lg-6">
+            <input type="text" name="nav-hover-brdr-lt-color" id="nav-hover-brdr-lt-color" class="form-control" value="#666666" ng-model="campaign.navHoverBorderLightColor">
+          </div>
+        </div>
 
-				<div class="form-group">
-					<label for="nav-hover-brdr-dk-color" class="col-lg-4 control-label">Nav Hover Border Dark Color</label>
-					<div class="col-lg-2">
-						<input type="color" name="nav-hover-brdr-dk-color" class="form-control" value="#666666" ng-model="campaign.navHoverBorderDarkColor">
-					</div>
-					<div class="col-lg-6">
-						<input type="text" name="nav-hover-brdr-dk-color" id="nav-hover-brdr-dk-color" class="form-control" value="#666666" ng-model="campaign.navHoverBorderDarkColor">
-					</div>
-				</div>
+        <div class="form-group">
+          <label for="nav-hover-brdr-dk-color" class="col-lg-4 control-label">Nav Hover Border Dark Color</label>
+          <div class="col-lg-2">
+            <input type="color" name="nav-hover-brdr-dk-color" class="form-control" value="#666666" ng-model="campaign.navHoverBorderDarkColor">
+          </div>
+          <div class="col-lg-6">
+            <input type="text" name="nav-hover-brdr-dk-color" id="nav-hover-brdr-dk-color" class="form-control" value="#666666" ng-model="campaign.navHoverBorderDarkColor">
+          </div>
+        </div>
 
-			</div>
-		</div> -->
+      </div>
+    </div> -->
 
-		<input type="submit" class="btn btn-primary btn-lg">
-	</form>
+    <input type="submit" class="btn btn-primary btn-lg">
+  </form>
 </div>
