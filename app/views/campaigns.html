@@ -2,9 +2,9 @@
 	<div class="pull-right">
 		<strong>{{ currentUser.username | capitalize }}</strong>&nbsp;&nbsp;&nbsp;<a href="#" ng-click="logout()">Logout <i class="glyphicon glyphicon-log-out"></i></a>
 	</div>
-	<img src="images/index-tech.png" class="logo">
+	<img src="http://zeisgroup.com/images/logo-button.png" class="logo">
 	<h1>Microsite Administration</h1>
-	<h4>Version 2.0</h4>
+
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="#/campaigns">Manage Campaigns</a></li>
 		<li><a href="#/groups">Manage Groups</a></li>
@@ -12,6 +12,7 @@
 		<li ng-hide="currentUser.role !== 1"><a href="#/users">Manage Users</a></li>
 	</ul>
 </div>
+
 <div class="slide-reveal">
 	<div class="page-header">
 		<h2>Manage Campaigns</h2>

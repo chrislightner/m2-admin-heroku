@@ -1,49 +1,48 @@
 <!-- <div ng-include src="'partials/header.html'"></div> -->
 <div class="header">
-	<div class="pull-right">
-		<strong>{{ currentUser.username | capitalize }}</strong>&nbsp;&nbsp;&nbsp;<a href="#" ng-click="logout()">Logout <i class="glyphicon glyphicon-log-out"></i></a>
-	</div>
-	<img src="images/index-tech.png" class="logo">
-	<h1>Microsite Administration</h1>
-	<h4>Version 2.0</h4>
-	<ul class="nav nav-tabs">
-		<li><a href="#/campaigns">Manage Campaigns</a></li>
-		<li><a href="#/groups">Manage Groups</a></li>
-		<li><a href="#/products">Manage Products</a></li>
-		<li ng-show="currentUser.role == 1" class="active"><a href="#/users">Manage Users</a></li>
-	</ul>
+    <div class="pull-right">
+        <strong>{{ currentUser.username | capitalize }}</strong>&nbsp;&nbsp;&nbsp;<a href="#" ng-click="logout()">Logout <i class="glyphicon glyphicon-log-out"></i></a>
+    </div>
+    <img src="http://zeisgroup.com/images/logo-button.png" class="logo">
+    <h1>Microsite Administration</h1>
+
+    <ul class="nav nav-tabs">
+        <li><a href="#/campaigns">Manage Campaigns</a></li>
+        <li><a href="#/groups">Manage Groups</a></li>
+        <li><a href="#/products">Manage Products</a></li>
+        <li ng-show="currentUser.role == 1" class="active"><a href="#/users">Manage Users</a></li>
+    </ul>
 </div>
 
-<div>
+<div class="slide-reveal">
+    <div class="page-header">
+        <h2>Manage Users</h2>
+    </div>
+    <p ng-show="currentUser.role == 1">
+        <a href="#/users/new">
+            <span class="glyphicon glyphicon-plus"></span>
+            Create a New User
+        </a>
+    </p>
+    <table class="table table-responsive table-bordered table-hover">
+        <thead>
+            <tr>
+                <th ng-show="currentUser.role == 1">&nbsp;</th>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody>
 
-	<div class="page-header">
-		<h2>Manage Users</h2>
-	</div>
-	<p ng-show="currentUser.role == 1">
-		<a href="#/users/new">
-			<span class="glyphicon glyphicon-plus"></span>
-			Create a New User
-		</a>
-	</p>
-	<table class="table table-responsive table-bordered table-hover">
-		<thead>
-			<tr>
-				<th ng-show="currentUser.role == 1">&nbsp;</th>
-				<th>Name</th>
-				<th>Username</th>
-				<th>Role</th>
-			</tr>
-		</thead>
-		<tbody>
+            <tr ng-repeat="user in users | orderBy:username">
+                <td ng-show="currentUser.role == 1" class="text-center"><a ng-href="#/users/{{ user.username }}"><i class="glyphicon glyphicon-edit"></i></a></td>
+                <td>{{ user.fname }} {{ user.lname }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.role }}</td>
+            </tr>
 
-			<tr ng-repeat="user in users | orderBy:username">
-				<td ng-show="currentUser.role == 1" class="text-center"><a ng-href="#/users/{{ user.username }}"><i class="glyphicon glyphicon-edit"></i></a></td>
-				<td>{{ user.fname }} {{ user.lname }}</td>
-				<td>{{ user.username }}</td>
-				<td>{{ user.role }}</td>
-			</tr>
-
-		</tbody>
-	</table>
+        </tbody>
+    </table>
 
 </div>

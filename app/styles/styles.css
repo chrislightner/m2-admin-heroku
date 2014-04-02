@@ -1,20 +1,68 @@
 /* Space out content a bit */
 body {
-    padding-top: 20px;
+    padding-top: 0;
     padding-bottom: 20px;
 }
 
+.container-fluid{
+}
+
+.container-fluid .header{
+  padding: 0 5%;
+}
+
+.container-fluid .slide-reveal{
+  padding: 0 5%;
+}
+
 .header {
+  background: #333;
 	border-bottom: none;
 	margin-bottom: 30px;
 }
 
-.logo{
-	height: 40px;
-	width: 40px;
-	margin: 0 5px 5px 0;
-	float:left;
+.header .pull-right{
+  font-size: 16px;
+  line-height: 72px;
+}
 
+.header .pull-right strong{
+  color: #ccc;
+  font-weight: normal;
+}
+
+.nav-tabs {
+  border-bottom: none;
+}
+
+.nav-tabs>li>a{
+  font-weight: 200;
+  font-size: 18px;
+}
+.nav-tabs>li>a:hover{
+  background: #333;
+  border: 1px solid rgba(0, 0, 0, 0);
+  border-bottom-color: #fff;
+  color: #428BCA;
+  text-decoration: underline;
+}
+
+.nav-tabs>li.active>a:hover{
+  text-decoration: none;
+}
+
+h1{
+  color: #fff;
+  line-height: 72px;
+  font-weight: 100;
+  margin: 0 0 0 60px;
+}
+
+.logo{
+  height: 40px;
+  width: 40px;
+  margin: 16px 8px 16px 0;
+  float: left;
 }
 
 .modal {
@@ -61,26 +109,51 @@ body {
 .ta-editor, .ta-editor.form-control{
 	display: block;
 	max-height: 600px;
-    min-height: 300px;
-    height: auto;
-    overflow: auto;
-    font-family: inherit;
-    font-size: 100%;
+  min-height: 300px;
+  height: auto;
+  overflow: auto;
+  font-family: inherit;
+  font-size: 100%;
 }
 
 #login-form input[type='text'], #login-form input[type='password']{
-    font-size: 24px;
-    padding: 11px 12px; 
-    height: 44px;
+  font-size: 24px;
+  padding: 11px 12px;
+  height: 44px;
+}
+
+#campaignsTable {
+  font-size: 16px;
+  font-weight: 200;
+}
+
+#campaignsTable tr th{
+  background: #333;
+  border-color: #333;
+  border-top: 1px solid #333;
+  border-right: 1px solid #CCC;
+  border-bottom: 1px solid #CCC;
+  color: #FFF;
+  font-size: 18px;
+  font-weight: 200;
 }
 
 #campaignsTable tr th:hover{
-    background-color: #F5F5F5;
-    cursor: pointer;
+  /*background-color: #F5F5F5;*/
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .campaign-external-link {
 	float: right;
 	font-size: 18px;
 	padding-top: 8px;
+}
+
+.input-group input[type=text].form-control{
+  width: 400px;
+}
+
+select.form-control{
+  width: auto;
 }
