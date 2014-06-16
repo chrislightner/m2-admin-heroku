@@ -122,12 +122,12 @@ h1{
   height: 44px;
 }
 
-#campaignsTable {
+table {
   font-size: 16px;
   font-weight: 200;
 }
 
-#campaignsTable tr th{
+table tr th{
   background: #333;
   border-color: #333;
   border-top: 1px solid #333;
@@ -138,7 +138,7 @@ h1{
   font-weight: 200;
 }
 
-#campaignsTable tr th:hover{
+table tr th:hover{
   /*background-color: #F5F5F5;*/
   cursor: pointer;
   text-decoration: underline;
