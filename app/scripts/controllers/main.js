@@ -4,15 +4,15 @@ angular.module('m2AdminApp')
 
 .controller('IndexCtrl', function(){
 })
-
+//coveragedetails.net/api/index.php/
 .controller('LoginCtrl', function($scope, $http, $log, $location){
 
 	$scope.checkLogin = function(credentials){
-		$http.post('/api/index.php/login', credentials)
+		$http.post('//coveragedetails.net/api/index.php/login', credentials)
 			.success(function(data){
 				$log.info(data);
 				if(data.status === 'success'){
-					$http.get('/api/index.php/users/' + data.username)
+					$http.get('//coveragedetails.net/api/index.php/users/' + data.username)
 						.success(function(data){
 							$scope.currentUser = data;
 						})
@@ -37,7 +37,7 @@ angular.module('m2AdminApp')
 	$scope.campaignSort = "jobNumber";
 	$scope.campaignSortReverse = false;
 
-	$http.get('/api/index.php/campaigns/campaignAll/')
+	$http.get('//coveragedetails.net/api/index.php/campaigns/campaignAll/')
 		.success(function(data){
 			$scope.campaigns = data;
 		})
@@ -53,7 +53,7 @@ angular.module('m2AdminApp')
 })
 .controller('CampaignCtrl', function($scope, $http, $routeParams, $log, $location, $modal, $filter){
 
-	$http.get('/api/index.php/campaigns/campaignAllById/' + $routeParams.campaignid)
+	$http.get('//coveragedetails.net/api/index.php/campaigns/campaignAllById/' + $routeParams.campaignid)
 		.success(function(data){
 			$scope.campaign = data;
 		})
@@ -61,7 +61,7 @@ angular.module('m2AdminApp')
 			$log.info(data);
 		});
 
-	$http.get('/api/index.php/groups')
+	$http.get('//coveragedetails.net/api/index.php/groups')
 		.success(function(data){
 			$scope.groups = data;
 		})
@@ -69,7 +69,7 @@ angular.module('m2AdminApp')
 			$log.info(data);
 		});
 
-	$http.get('/api/index.php/products')
+	$http.get('//coveragedetails.net/api/index.php/products')
 		.success(function(data){
 			$scope.products = data;
 		})
@@ -85,7 +85,7 @@ angular.module('m2AdminApp')
 
 		console.log(campaign);
 
-		$http.put('/api/index.php/campaigns', campaign)
+		$http.put('//coveragedetails.net/api/index.php/campaigns', campaign)
 			.success(function(data){
 				$log.info('Saved ', data);
 				$location.url('/campaigns');
@@ -111,7 +111,7 @@ angular.module('m2AdminApp')
 
 			if(deleteVerify === 'delete'){
 				//using $http.delete() throws a parse error in IE8, use $http['delete'] instead
-				$http['delete']('/api/index.php/campaigns/' + $scope.campaign.id )
+				$http['delete']('//coveragedetails.net/api/index.php/campaigns/' + $scope.campaign.id )
 				.success(function(){
 					$location.url('/campaigns');
 				})
@@ -139,7 +139,7 @@ angular.module('m2AdminApp')
 })
 .controller('CreateCampaignCtrl', function($scope, $http, $routeParams, $log, $location, $filter){
 
-	// $http.get('/api/index.php/campaigns')
+	// $http.get('//coveragedetails.net/api/index.php/campaigns')
 	// 	.success(function(data){
 	// 		$scope.campaigns = data;
 	// 	})
@@ -151,7 +151,7 @@ angular.module('m2AdminApp')
 		$scope.campaign.shortName = $filter('jobNumberToShortName')($scope.campaign.jobNumber);
 	}
 
-	$http.get('/api/index.php/groups')
+	$http.get('//coveragedetails.net/api/index.php/groups')
 		.success(function(data){
 			$scope.groups = data;
 		})
@@ -159,7 +159,7 @@ angular.module('m2AdminApp')
 			$log.info(data);
 		});
 
-	$http.get('/api/index.php/products')
+	$http.get('//coveragedetails.net/api/index.php/products')
 		.success(function(data){
 			$scope.products = data;
 		})
@@ -169,7 +169,7 @@ angular.module('m2AdminApp')
 
 	$scope.submitCreateCampaign = function(campaign){
 
-		$http.post('/api/index.php/campaigns/new', campaign)
+		$http.post('//coveragedetails.net/api/index.php/campaigns/new', campaign)
 			.success(function(data){
 				$log.info('Saved ', data);
 				$location.url('/campaigns');
@@ -182,7 +182,7 @@ angular.module('m2AdminApp')
 })
 .controller('GroupsCtrl', function($scope, $http, $routeParams, $log){
 
-	$http.get('/api/index.php/groups')
+	$http.get('//coveragedetails.net/api/index.php/groups')
 	.success(function(data){
 		$scope.groups = data;
 	})
@@ -193,7 +193,7 @@ angular.module('m2AdminApp')
 })
 .controller('GroupCtrl', function($scope, $http, $routeParams, $log, $location, $modal){
 
-	$http.get('/api/index.php/groups/' + $routeParams.groupShortName)
+	$http.get('//coveragedetails.net/api/index.php/groups/' + $routeParams.groupShortName)
 		.success(function(data){
 			$scope.group = data;
 		})
@@ -201,7 +201,7 @@ angular.module('m2AdminApp')
 			$log.info(data);
 		});
 
-	$http.get('/api/index.php/tpas')
+	$http.get('//coveragedetails.net/api/index.php/tpas')
 		.success(function(data){
 			$scope.tpas = data;
 		})
@@ -210,7 +210,7 @@ angular.module('m2AdminApp')
 		});
 
 	$scope.saveGroup = function(group){
-		$http.put('/api/index.php/groups', group)
+		$http.put('//coveragedetails.net/api/index.php/groups', group)
 			.success(function(data){
 				$log.info('Saved ', data);
 				$location.url('/groups');
@@ -235,7 +235,7 @@ angular.module('m2AdminApp')
 		modalInstance.result.then(function (deleteVerify){
 			if(deleteVerify === 'delete'){
 				//using $http.delete() throws a parse error in IE8, use $http['delete'] instead
-				$http['delete']('/api/index.php/groups/' + $scope.group.id ).success(function(){
+				$http['delete']('//coveragedetails.net/api/index.php/groups/' + $scope.group.id ).success(function(){
 					$location.url('/groups');
 				})
 				.error(function(data){
@@ -262,7 +262,7 @@ angular.module('m2AdminApp')
 })
 .controller('CreateGroupCtrl', function($scope, $http, $routeParams, $log, $location){
 
-	$http.get('/api/index.php/tpas')
+	$http.get('//coveragedetails.net/api/index.php/tpas')
 		.success(function(data){
 			$scope.tpas = data;
 		})
@@ -271,7 +271,7 @@ angular.module('m2AdminApp')
 		});
 
 	$scope.submitCreateGroup = function(group){
-		$http.post('/api/index.php/groups/new', group)
+		$http.post('//coveragedetails.net/api/index.php/groups/new', group)
 			.success(function(data){
 				$log.info('Saved ', data);
 				$location.url('/groups');
@@ -284,7 +284,7 @@ angular.module('m2AdminApp')
 })
 .controller('ProductsCtrl', function($scope, $http, $routeParams, $log){
 
-	$http.get('/api/index.php/products')
+	$http.get('//coveragedetails.net/api/index.php/products')
 	.success(function(data){
 		$scope.products = data;
 	})
@@ -295,14 +295,14 @@ angular.module('m2AdminApp')
 })
 .controller('ProductCtrl', function($scope, $http, $routeParams, $log, $location, $modal){
 
-	$http.get('/api/index.php/products/' + $routeParams.productShortName)
+	$http.get('//coveragedetails.net/api/index.php/products/' + $routeParams.productShortName)
 		.success(function(data){
 			$scope.product = data;
 		});
 
 	$scope.saveProduct = function(product){
 
-		$http.put('/api/index.php/products', product)
+		$http.put('//coveragedetails.net/api/index.php/products', product)
 			.success(function(data){
 				$log.info('Saved ', data);
 				$location.url('/products');
@@ -327,7 +327,7 @@ angular.module('m2AdminApp')
 		modalInstance.result.then(function (deleteVerify){
 			if(deleteVerify === 'delete'){
 				//using $http.delete() throws a parse error in IE8, use $http['delete'] instead
-				$http['delete']('/api/index.php/products/' + $scope.product.id )
+				$http['delete']('//coveragedetails.net/api/index.php/products/' + $scope.product.id )
 					.success(function(){
 						$location.url('/products');
 					})
@@ -360,7 +360,7 @@ angular.module('m2AdminApp')
 
 		$log.info(product);
 
-		$http.post('/api/index.php/products/new', product)
+		$http.post('//coveragedetails.net/api/index.php/products/new', product)
 			.success(function(data){
 				$log.info('Saved ', data);
 				$location.url('/products');
@@ -374,26 +374,26 @@ angular.module('m2AdminApp')
 })
 .controller('UsersCtrl', function($scope, $http){
 
-	$http.get('/api/index.php/users').success(function(data){
+	$http.get('//coveragedetails.net/api/index.php/users').success(function(data){
 		$scope.users = data;
 	});
 
 })
 .controller('UserCtrl', function($scope, $http, $routeParams, $log, $location, $modal){
 
-	$http.get('/api/index.php/users/' + $routeParams.username)
+	$http.get('//coveragedetails.net/api/index.php/users/' + $routeParams.username)
 		.success(function(data){
 			$scope.user = data;
 		});
 
-	$http.get('/api/index.php/userRoles')
+	$http.get('//coveragedetails.net/api/index.php/userRoles')
 		.success(function(data){
 			$scope.roles = data;
 		});
 
 	$scope.saveUser = function(user){
 
-		$http.put('/api/index.php/users', user)
+		$http.put('//coveragedetails.net/api/index.php/users', user)
 			.success(function(data){
 				$log.info('Saved ', data);
 				$location.url('/users');
@@ -418,7 +418,7 @@ angular.module('m2AdminApp')
 		modalInstance.result.then(function (deleteVerify){
 			if(deleteVerify === 'delete'){
 				//using $http.delete() throws a parse error in IE8, use $http['delete'] instead
-				$http['delete']('/api/index.php/users/' + $scope.user.id )
+				$http['delete']('//coveragedetails.net/api/index.php/users/' + $scope.user.id )
 				.success(function(){
 					$location.url('/users');
 				})
@@ -446,7 +446,7 @@ angular.module('m2AdminApp')
 })
 .controller('CreateUserCtrl', function($scope, $http, $routeParams, $log, $location){
 
-	$http.get('/api/index.php/userRoles')
+	$http.get('//coveragedetails.net/api/index.php/userRoles')
 		.success(function(data){
 			$scope.roles = data;
 		})
@@ -456,7 +456,7 @@ angular.module('m2AdminApp')
 
 	$scope.submitCreateUser = function(user){
 
-		$http.post('/api/index.php/users/new', user)
+		$http.post('//coveragedetails.net/api/index.php/users/new', user)
 			.success(function(data){
 				$log.info('Saved ', data);
 				$location.url('/users');
