@@ -128,13 +128,13 @@ angular.module('m2AdminApp')
 
 
 		// validator: make sure they've given a new job number and short name
-		if ($("#new-job-number").val() != "" && $("#new-short-name").val() != "" ) {
+		if ($("#new-job-number").val() != "") {
 
 			// change the job number
 			campaign.jobNumber = $("#new-job-number").val();
 
 			// change the short name
-			campaign.shortName = $("#new-short-name").val();
+			campaign.shortName = $("#new-job-number").val().substr(5,8);
 
 			// create the campaign
 			$http.post('//coveragedetails.net/api/index.php/campaigns/new', campaign)
