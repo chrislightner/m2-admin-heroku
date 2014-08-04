@@ -45,6 +45,16 @@ angular.module('m2AdminApp')
 			$log.info(data);
 		});
 
+    $http.get('//coveragedetails.net/api/index.php/groups')
+      .success(function(groups){
+        $scope.groups = groups;
+      });
+
+    $http.get('//coveragedetails.net/api/index.php/products')
+      .success(function(products){
+        $scope.products = products;
+      });
+
 	$scope.sortBy = function(sortBy){
 		$scope.campaignSort = sortBy;
 		$scope.campaignSortReverse = !$scope.campaignSortReverse;
