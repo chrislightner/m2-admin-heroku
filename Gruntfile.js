@@ -360,8 +360,8 @@ module.exports = function (grunt) {
         },
         src: '<%= yeoman.dist %>/',
         dest: '/admin/',
-        simple: 'true',
-        useList: 'false'
+        simple: 'false',
+	useList: 'false'
       },
       prod: {
         auth: {
@@ -372,7 +372,7 @@ module.exports = function (grunt) {
         src: '<%= yeoman.dist %>/',
         dest: '/admin/',
         simple: 'true',
-        useList: 'false'
+	useList: 'false'
       }
     }
   });

@@ -124,6 +124,34 @@ angular.module('m2AdminApp')
 		});
 	};
 
+	$scope.duplicateCampaign = function(campaign) {
+
+
+		// validator: make sure they've given a new job number and short name
+		if ($("#new-job-number").val() != "") {
+
+			// change the job number
+			campaign.jobNumber = $("#new-job-number").val();
+
+			// change the short name
+			campaign.shortName = $("#new-job-number").val().substr($("#new-job-number").val().indexOf("-"),$("#new-job-number").val().length);
+
+			// create the campaign
+			$http.post('//coveragedetails.net/api/index.php/campaigns/new', campaign)
+				.success(function(data){
+					$log.info('Saved ', data);
+					$location.url('/campaigns');
+				})
+				.error(function(data){
+					$log.info('Error ', data);
+				});
+			// validator message
+		} else {
+			alert("Please fill out the form");
+		}
+		
+	};
+
 })
 .controller('deleteCampaignModalCtrl', function($scope, $log, $modalInstance, campaign){
 
