@@ -50,6 +50,24 @@ angular.module('m2AdminApp')
 		$scope.campaignSortReverse = !$scope.campaignSortReverse;
 	}
 
+	$scope.$watch('campaignFilter.groupShortName', function(newValue){
+      // console.log(newValue, oldValue);
+      if(newValue === null){
+        $scope.campaignFilter.groupShortName = '';
+      }
+    });
+
+    $scope.$watch('campaignFilter.productShortName', function(newValue){
+      // console.log(newValue, oldValue);
+      if(newValue === null){
+        $scope.campaignFilter.productShortName = '';
+      }
+    });
+
+    $scope.clearFilter = function(){
+      $scope.campaignFilter = {};
+    };
+
 })
 .controller('CampaignCtrl', function($scope, $http, $routeParams, $log, $location, $modal, $filter){
 
