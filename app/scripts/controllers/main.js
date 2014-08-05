@@ -147,7 +147,8 @@ angular.module('m2AdminApp')
 			if(deleteVerify === 'delete'){
 				//using $http.delete() throws a parse error in IE8, use $http['delete'] instead
 				$http['delete']('//coveragedetails.net/api/index.php/campaigns/' + $scope.campaign.id )
-				.success(function(){
+				.success(function(data){
+					console.log(data);
 					$location.url('/campaigns');
 				})
 				.error(function(data){
