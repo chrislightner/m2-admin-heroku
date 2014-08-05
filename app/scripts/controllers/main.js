@@ -196,11 +196,9 @@ angular.module('m2AdminApp')
 		});
 
 	$scope.submitCreateCampaign = function(campaign){
-		console.log("joy");
 
 		// validator
 		if ($("#jobNumber").val() == "") {
-			console.log("no job number");
 			alert("Please enter a job number");
 		} else if ($("#segmentio-id").val() == "") {
 			alert("Please enter a Segment.io ID");
