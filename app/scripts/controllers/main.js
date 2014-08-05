@@ -197,7 +197,13 @@ angular.module('m2AdminApp')
 
 	$scope.submitCreateCampaign = function(campaign){
 
-		$http.post('//coveragedetails.net/api/index.php/campaigns/new', campaign)
+		// validator
+		if ($("#jobNumber").val() == "") {
+			alert("Please enter a job number");
+		} else if ($("#segmentio-id").val() == "") {
+			alert("Please enter a Segment.io ID");
+		} else { // success
+			$http.post('//coveragedetails.net/api/index.php/campaigns/new', campaign)
 			.success(function(data){
 				$log.info('Saved ', data);
 				$location.url('/campaigns');
@@ -205,6 +211,8 @@ angular.module('m2AdminApp')
 			.error(function(data){
 				$log.info('Error ', data);
 			});
+		}
+
 	};
 
 })
