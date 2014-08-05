@@ -29,12 +29,12 @@
             <input type="text" ng-model="campaignFilter.jobNumber" class="form-control" placeholder="Filter Job Number">
           </div>
           <div class="col-sm-5 col-lg-2">
-            <select class="form-control" ng-model="campaignFilter.group.shortName" ng-options="group.shortName as group.shortName for group in groups">
+            <select class="form-control" ng-model="campaignFilter.groupShortName" ng-options="group.shortName as group.shortName for group in groups">
               <option value="">All Groups</option>
             </select>
           </div>
           <div class="col-sm-5 col-lg-2">
-            <select class="form-control" ng-model="campaignFilter.product.shortName" ng-options="product.shortName as product.shortName for product in products">
+            <select class="form-control" ng-model="campaignFilter.productShortName" ng-options="product.shortName as product.shortName for product in products">
               <option value="">All Products</option>
             </select>
           </div>
@@ -60,8 +60,8 @@
             <tr ng-repeat="campaign in filteredCampaigns = (campaigns | filter:campaignFilter) | orderBy:campaignSort:campaignSortReverse">
                 <td ng-show="currentUser.role <= 2" class="text-center"><a ng-href="#/campaigns/{{ campaign.id }}"><i class="glyphicon glyphicon-edit"></i></a></td>
                 <td>{{ campaign.jobNumber }}</td>
-                <td>{{ campaign.group.shortName }}</td>
-                <td>{{ campaign.product.shortName }}</td>
+                <td>{{ campaign.groupShortName }}</td>
+                <td>{{ campaign.productShortName }}</td>
                 <td>{{ campaign.description }}</td>
                 <td>{{ campaign.lastModified | datetimeToDate | date:'EEE MM/dd/yyyy @ h:mma'}}</td>
                 <!-- <td ng-show="currentUser.role <= 2" class="text-center"><a ng-href="/#/{{ campaign.group.shortName | lowercase }}/{{campaign.product.shortName | lowercase }}/{{campaign.shortName}}" target="_blank"><i class="glyphicon glyphicon-new-window"></i></a></td> -->
