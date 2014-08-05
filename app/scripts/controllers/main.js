@@ -39,16 +39,51 @@ angular.module('m2AdminApp')
 
 	$http.get('//coveragedetails.net/api/index.php/campaigns/campaignAll/')
 		.success(function(data){
+			data.forEach(function(e){
+				e.groupShortName = e.group.shortName;
+				e.productShortName = e.product.shortName;
+			});
 			$scope.campaigns = data;
+			console.log(data);
 		})
 		.error(function(data){
 			$log.info(data);
 		});
 
+    $http.get('//coveragedetails.net/api/index.php/groups')
+      .success(function(groups){
+        $scope.groups = groups;
+      });
+
+    $http.get('//coveragedetails.net/api/index.php/products')
+      .success(function(products){
+        $scope.products = products;
+      });
+
 	$scope.sortBy = function(sortBy){
 		$scope.campaignSort = sortBy;
 		$scope.campaignSortReverse = !$scope.campaignSortReverse;
 	}
+
+	$scope.$watch('campaignFilter.groupShortName', function(newValue){
+      // console.log(newValue, oldValue);
+      console.log(newValue);
+      if(newValue === null){
+        $scope.campaignFilter.groupShortName = '';
+      }
+    });
+
+    $scope.$watch('campaignFilter.productShortName', function(newValue){
+      // console.log(newValue, oldValue);
+      console.log(newValue);
+      if(newValue === null){
+        $scope.campaignFilter.productShortName = '';
+      }
+    });
+
+    $scope.clearFilter = function(){
+      $scope.campaignFilter = {};
+    };
 
 })
 .controller('CampaignCtrl', function($scope, $http, $routeParams, $log, $location, $modal, $filter){

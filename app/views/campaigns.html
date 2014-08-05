@@ -23,8 +23,28 @@
             Create a New Campaign
         </a>
     </p>
+    <div class="campaign-filters row">
+        <form name="campaignFilters">
+          <div class="col-sm-5 col-lg-2">
+            <input type="text" ng-model="campaignFilter.jobNumber" class="form-control" placeholder="Filter Job Number">
+          </div>
+          <div class="col-sm-5 col-lg-2">
+            <select class="form-control" ng-model="campaignFilter.groupShortName" ng-options="group.shortName as group.shortName for group in groups">
+              <option value="">All Groups</option>
+            </select>
+          </div>
+          <div class="col-sm-5 col-lg-2">
+            <select class="form-control" ng-model="campaignFilter.productShortName" ng-options="product.shortName as product.shortName for product in products">
+              <option value="">All Products</option>
+            </select>
+          </div>
+          <div class="col-sm-2 col-lg-2">
+            <a ng-href="" class="btn btn-link" ng-click="clearFilter()" ng-show="campaignFilters.$dirty"><span class="glyphicon glyphicon-minus-sign"></span> Clear filters</a>
+          </div>
+        </form>
+      </div>
 
-    <table id="campaignsTable" class="table table-striped table-bordered table-hover">
+    <table ng-hide="filteredCampaigns.length == 0" id="campaignsTable" class="table table-striped table-bordered table-hover">
         <thead>
             <tr>
                 <th ng-show="currentUser.role <= 2">&nbsp;</th>
@@ -37,11 +57,11 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="campaign in campaigns | orderBy:campaignSort:campaignSortReverse">
+            <tr ng-repeat="campaign in filteredCampaigns = (campaigns | filter:campaignFilter) | orderBy:campaignSort:campaignSortReverse">
                 <td ng-show="currentUser.role <= 2" class="text-center"><a ng-href="#/campaigns/{{ campaign.id }}"><i class="glyphicon glyphicon-edit"></i></a></td>
                 <td>{{ campaign.jobNumber }}</td>
-                <td>{{ campaign.group.shortName }}</td>
-                <td>{{ campaign.product.shortName }}</td>
+                <td>{{ campaign.groupShortName }}</td>
+                <td>{{ campaign.productShortName }}</td>
                 <td>{{ campaign.description }}</td>
                 <td>{{ campaign.lastModified | datetimeToDate | date:'EEE MM/dd/yyyy @ h:mma'}}</td>
                 <!-- <td ng-show="currentUser.role <= 2" class="text-center"><a ng-href="/#/{{ campaign.group.shortName | lowercase }}/{{campaign.product.shortName | lowercase }}/{{campaign.shortName}}" target="_blank"><i class="glyphicon glyphicon-new-window"></i></a></td> -->
@@ -50,4 +70,10 @@
 
         </tbody>
     </table>
+    <div ng-show="filteredCampaigns.length == 0" class="alert alert-info">
+        No matching campaigns.
+        <a href="/#/campaigns" class="btn btn-link" ng-click="clearFilter()" ng-show="campaignFilter.groupShortName.length > 0 || campaignFilter.productShortName.length > 0">
+          <span class="glyphicon glyphicon-minus-sign"></span> Clear filters
+        </a>
+      </div>
 </div>
