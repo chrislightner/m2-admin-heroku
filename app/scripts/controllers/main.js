@@ -170,7 +170,7 @@ angular.module('m2AdminApp')
 			campaign.jobNumber = $("#new-job-number").val();
 
 			// change the short name
-			campaign.shortName = $("#new-job-number").val().substr($("#new-job-number").val().indexOf("-"),$("#new-job-number").val().length);
+			campaign.shortName = $("#new-job-number").val().substr($("#new-job-number").val().indexOf("-")+1,$("#new-job-number").val().length);
 
 			// create the campaign
 			$http.post('//coveragedetails.net/api/index.php/campaigns/new', campaign)
