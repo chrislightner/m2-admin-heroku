@@ -1,12 +1,12 @@
 <div class="modal-header">
-    <h3>Permantly Delete {{ group.shortName }}?</h3>
+    <h3>Delete {{ group.shortName }}?</h3>
 </div>
 <div class="modal-body">
 	<p>
-		Are you sure you want to <strong>permantly</strong> delete {{ group.name }}? This is not reversible and will break any campaigns that may be using group.
+		Are you sure you want to delete {{ group.name }}? This will break any campaigns that may be using group.
 	</p>
 </div>
 <div class="modal-footer">
     <button class="btn btn-danger" ng-click="ok()">Delete {{ group.shortName }}</button>
-    <button class="btn" ng-click="cancel()">Nevermind</button>
+    <button class="btn" ng-click="cancel()">Cancel</button>
 </div>
