@@ -365,16 +365,21 @@
     <div class="panel panel-default">
       <div class="panel-heading"><h3 class="panel-title">Duplicate Campaign</h3></div>
       <div class="panel-body">
-        <div class="form-group">
-                    <div class="col-lg-10">
-                        <button type="button" class="btn btn-info" ng-click="">Duplicate Campaign</button>
-                        <label for="duplicate" class="col-lg-2 control-label">Job Number</label>
-                        <input name="job-number" id="job-number" type="text">
-                    </div>
-                </div>
+          <div class="row row-lg-height">
+            <div class="col-lg-12">
+              <div class="form-group">
+                  <label for="new-job-number" class="col-lg-2 control-label">New Job Number</label>
+                  <input name="new-job-number" class="col-lg-4" id="new-job-number" type="text">
+              </div>
+            </div>
+        </div>
+       <div class="row row-lg-height">
+          <div class="col-lg-4">
+                <input type="button" class="btn btn-info" ng-click="duplicateCampaign(campaign)" value="Duplicate Campaign">
+          </div>
+        </div>
       </div>
     </div>
-
 
     <div class="panel panel-default">
       <div class="panel-heading"><h3 class="panel-title">Delete Campaign</h3></div>
@@ -385,9 +390,6 @@
                     </label>
                     <div class="col-lg-10">
                         <button type="button" class="btn btn-danger" ng-click="deleteVerify()">Delete Campaign</button>
-                        <small class="text-right">
-                            You probably don't want to do this
-                        </small>
                     </div>
                 </div>
       </div>

@@ -39,16 +39,51 @@ angular.module('m2AdminApp')
 
 	$http.get('//coveragedetails.net/api/index.php/campaigns/campaignAll/')
 		.success(function(data){
+			data.forEach(function(e){
+				e.groupShortName = e.group.shortName;
+				e.productShortName = e.product.shortName;
+			});
 			$scope.campaigns = data;
+			console.log(data);
 		})
 		.error(function(data){
 			$log.info(data);
 		});
 
+    $http.get('//coveragedetails.net/api/index.php/groups')
+      .success(function(groups){
+        $scope.groups = groups;
+      });
+
+    $http.get('//coveragedetails.net/api/index.php/products')
+      .success(function(products){
+        $scope.products = products;
+      });
+
 	$scope.sortBy = function(sortBy){
 		$scope.campaignSort = sortBy;
 		$scope.campaignSortReverse = !$scope.campaignSortReverse;
 	}
+
+	$scope.$watch('campaignFilter.groupShortName', function(newValue){
+      // console.log(newValue, oldValue);
+      console.log(newValue);
+      if(newValue === null){
+        $scope.campaignFilter.groupShortName = '';
+      }
+    });
+
+    $scope.$watch('campaignFilter.productShortName', function(newValue){
+      // console.log(newValue, oldValue);
+      console.log(newValue);
+      if(newValue === null){
+        $scope.campaignFilter.productShortName = '';
+      }
+    });
+
+    $scope.clearFilter = function(){
+      $scope.campaignFilter = {};
+    };
 
 })
 .controller('CampaignCtrl', function($scope, $http, $routeParams, $log, $location, $modal, $filter){
@@ -112,7 +147,8 @@ angular.module('m2AdminApp')
 			if(deleteVerify === 'delete'){
 				//using $http.delete() throws a parse error in IE8, use $http['delete'] instead
 				$http['delete']('//coveragedetails.net/api/index.php/campaigns/' + $scope.campaign.id )
-				.success(function(){
+				.success(function(data){
+					console.log(data);
 					$location.url('/campaigns');
 				})
 				.error(function(data){
@@ -122,6 +158,34 @@ angular.module('m2AdminApp')
 		}, function () {
 
 		});
+	};
+
+	$scope.duplicateCampaign = function(campaign) {
+
+
+		// validator: make sure they've given a new job number and short name
+		if ($("#new-job-number").val() != "") {
+
+			// change the job number
+			campaign.jobNumber = $("#new-job-number").val();
+
+			// change the short name
+			campaign.shortName = $("#new-job-number").val().substr($("#new-job-number").val().indexOf("-"),$("#new-job-number").val().length);
+
+			// create the campaign
+			$http.post('//coveragedetails.net/api/index.php/campaigns/new', campaign)
+				.success(function(data){
+					$log.info('Saved ', data);
+					$location.url('/campaigns');
+				})
+				.error(function(data){
+					$log.info('Error ', data);
+				});
+			// validator message
+		} else {
+			alert("Please fill out the form");
+		}
+		
 	};
 
 })
@@ -169,7 +233,13 @@ angular.module('m2AdminApp')
 
 	$scope.submitCreateCampaign = function(campaign){
 
-		$http.post('//coveragedetails.net/api/index.php/campaigns/new', campaign)
+		// validator
+		if ($("#jobNumber").val() == "") {
+			alert("Please enter a job number");
+		} else if ($("#segmentio-id").val() == "") {
+			alert("Please enter a Segment.io ID");
+		} else { // success
+			$http.post('//coveragedetails.net/api/index.php/campaigns/new', campaign)
 			.success(function(data){
 				$log.info('Saved ', data);
 				$location.url('/campaigns');
@@ -177,6 +247,8 @@ angular.module('m2AdminApp')
 			.error(function(data){
 				$log.info('Error ', data);
 			});
+		}
+
 	};
 
 })
