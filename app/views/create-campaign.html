@@ -111,6 +111,15 @@
           </div>
         </div>
         <div class="form-group">
+          <label for="vwo" class="col-lg-2 control-label">Campaign has VWO:</label>
+          <div class="col-lg-10 input-group">
+            <div class="input-group">
+              <input type="radio" ng-model="campaign.VWO" value="1"> Yes <br/>
+              <input type="radio" ng-model="campaign.VWO" value="0"> No <br/>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
           <label for="compliance-code" class="col-lg-2 control-label">Compliance Code</label>
           <div class="col-lg-10">
             <input type="text" name="complianceCode" id="complianceCode" class="form-control" ng-model="campaign.complianceCode">
