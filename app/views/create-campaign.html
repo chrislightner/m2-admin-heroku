@@ -2,7 +2,7 @@
   <div class="pull-right">
     <strong>{{ currentUser.username | capitalize }}</strong>&nbsp;&nbsp;&nbsp;<a href="#" ng-click="logout()">Logout <i class="glyphicon glyphicon-log-out"></i></a>
   </div>
-  <img src="images/logo-button.png" class="logo">
+  <img src="images/c195fb62.logo-button.png" class="logo">
   <h1>Microsite Administration</h1>
 
   <ul class="nav nav-tabs">
@@ -72,8 +72,8 @@
           <label for="eenroll" class="col-lg-2 control-label">Enrollment Method:</label>
           <div class="col-lg-10 input-group">
             <div class="enrollment-switch">
-              <input type="radio" ng-model="campaign.eEnroll" value="1"> eEnroll <br/>
-              <input type="radio" ng-model="campaign.eEnroll" value="0"> Downloadable PDF <br/>
+              <input type="radio" ng-model="campaign.eEnroll" value="1"> eEnroll <br>
+              <input type="radio" ng-model="campaign.eEnroll" value="0"> Downloadable PDF <br>
             </div>
           </div>
         </div>
@@ -99,9 +99,9 @@
         <div class="form-group">
           <label for="medExamRequired" class="col-lg-2 control-label">Display Medical Exam Language?:</label>
           <div class="col-lg-10 input-group">
-            <input type="radio" ng-model="campaign.medExamRequired" value="0" ng-checked="true"> None <br/>
-            <input type="radio" ng-model="campaign.medExamRequired" value="1"> No medical exam typically required <br/>
-            <input type="radio" ng-model="campaign.medExamRequired" value="2"> Approval Guaranteed <br/>
+            <input type="radio" ng-model="campaign.medExamRequired" value="0" ng-checked="true"> None <br>
+            <input type="radio" ng-model="campaign.medExamRequired" value="1"> No medical exam typically required <br>
+            <input type="radio" ng-model="campaign.medExamRequired" value="2"> Approval Guaranteed <br>
           </div>
         </div>
         <div class="form-group">
@@ -120,8 +120,8 @@
           <label for="vwo" class="col-lg-2 control-label">Campaign has VWO:</label>
           <div class="col-lg-10 input-group">
             <div class="input-group">
-              <input type="radio" ng-model="campaign.VWO" value="1"> Yes <br/>
-              <input type="radio" ng-model="campaign.VWO" value="0"> No <br/>
+              <input type="radio" ng-model="campaign.VWO" value="1"> Yes <br>
+              <input type="radio" ng-model="campaign.VWO" value="0"> No <br>
             </div>
           </div>
         </div>
@@ -166,7 +166,7 @@
       <div class="panel-body">
 
         <div class="form-group">
-          <p  class="col-lg-2 control-label"><strong>Is there a calculator?</strong></p>
+          <p class="col-lg-2 control-label"><strong>Is there a calculator?</strong></p>
           <div class="col-lg-10">
             <label class="radio-inline">
               <input type="radio" name="calculator" id="calculator-1" value="1" ng-model="campaign.hasCalc">
@@ -189,7 +189,7 @@
         <div class="form-group">
           <label for="homepage-content" class="col-lg-2 control-label">Homepage content, if there is no calculator</label>
           <div class="col-lg-10">
-            <div text-angular text-angular-name="homepage-content-creator" id="homepage-content" name="homepage-content" rows="10" cols="80" ng-model="campaign.homepageContentHtml"></div>
+            <div text-angular="" text-angular-name="homepage-content-creator" id="homepage-content" name="homepage-content" rows="10" cols="80" ng-model="campaign.homepageContentHtml"></div>
           </div>
         </div>
 
@@ -212,25 +212,25 @@
             <input type="text" name="leadin-copy-personalized" id="leadin-copy-personalized" class="form-control" ng-model="campaign.leadInCopyPersonalized">
           </div>
         </div>
-        <div class="form-group" style="display: none;">
+        <div class="form-group" style="display: none">
           <label for="fname-personalized" class="col-lg-2 control-label">First Name Copy (Personalized)</label>
           <div class="col-lg-10 input-group">
             <input type="hidden" name="fname-personalized" id="fname-personalized" class="form-control" ng-model="campaign.fnamePersonalized">
           </div>
         </div>
-        <div class="form-group" style="display: none;">
+        <div class="form-group" style="display: none">
           <label for="fname-non-personalized" class="col-lg-2 control-label">First Name Copy (Non Personalized)</label>
           <div class="col-lg-10 input-group">
             <input type="hidden" name="fname-personalized" id="fname-personalized" class="form-control" ng-model="campaign.fnameNonPersonalized">
           </div>
         </div>
-        <div class="form-group" style="display: none;">
+        <div class="form-group" style="display: none">
           <label for="lname-personalized" class="col-lg-2 control-label">Last Name Copy (Personalized)</label>
           <div class="col-lg-10 input-group">
             <input type="hidden" name="lname-personalized" id="lname-personalized" class="form-control" ng-model="campaign.lnamePersonalized">
           </div>
         </div>
-        <div class="form-group" style="display: none;">
+        <div class="form-group" style="display: none">
           <label for="lname-non-personalized" class="col-lg-2 control-label">Last Name Copy (Non Personalized)</label>
           <div class="col-lg-10 input-group">
             <input type="hidden" name="lname-personalized" id="lname-personalized" class="form-control" ng-model="campaign.lnameNonPersonalized">
@@ -260,25 +260,25 @@
         <div class="form-group">
           <label for="overview-content" class="col-lg-2 control-label">Overview Content</label>
           <div class="col-lg-10 input-group">
-            <div text-angular text-angular-name="overview-content-creator" id="overview-content" name="overview-content" rows="10" cols="80" ng-model="campaign.coverageOverviewHtml" ></div>
+            <div text-angular="" text-angular-name="overview-content-creator" id="overview-content" name="overview-content" rows="10" cols="80" ng-model="campaign.coverageOverviewHtml"></div>
           </div>
         </div>
         <div class="form-group">
           <label for="faq-content" class="col-lg-2 control-label">FAQ Content</label>
           <div class="col-lg-10 input-group">
-            <div text-angular text-angular-name="faq-content-creator" id="faq-content" name="faq-content" rows="10" cols="80" ng-model="campaign.faqContentHtml"></div>
+            <div text-angular="" text-angular-name="faq-content-creator" id="faq-content" name="faq-content" rows="10" cols="80" ng-model="campaign.faqContentHtml"></div>
           </div>
         </div>
         <div class="form-group">
           <label for="howtoapply-content" class="col-lg-2 control-label">How to Apply Content</label>
           <div class="col-lg-10 input-group">
-            <div text-angular text-angular-name="howtoapply-content-creator" id="howtoapply-content" name="howToApply-content" rows="10" cols="80" ng-model="campaign.howToApplyContentHtml"></div>
+            <div text-angular="" text-angular-name="howtoapply-content-creator" id="howtoapply-content" name="howToApply-content" rows="10" cols="80" ng-model="campaign.howToApplyContentHtml"></div>
           </div>
         </div>
         <div class="form-group">
           <label for="footer-content" class="col-lg-2 control-label">Footer Content</label>
           <div class="col-lg-10 input-group">
-            <div text-angular text-angular-name="footer-content-creator" id="footer-content" name="footer-content" rows="10" cols="80" ng-model="campaign.footerHtml"></div>
+            <div text-angular="" text-angular-name="footer-content-creator" id="footer-content" name="footer-content" rows="10" cols="80" ng-model="campaign.footerHtml"></div>
           </div>
         </div>
 
