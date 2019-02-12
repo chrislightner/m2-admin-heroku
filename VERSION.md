@@ -1,17 +1,6 @@
-#1.2.4
---
-2/12/19  
-* Upgrading gruntfile.js to remove build errors
+Turning imagemin back on...
 
-#1.2.3
---
-2/12/19  
-* Upgrading packages to remove buld errors
-
-#1.2.2
---
-2/12/19  
-* Upgrading packages to remove buld errors
+Several commits working on build...
 
 #1.2.1
 --
