@@ -160,11 +160,11 @@ module.exports = function (grunt) {
         assetCacheBuster: false
       },
       dist: {
-        options: {
-          generatedImagesDir: '<%= yeoman.dist %>/images/generated',
-          environment: 'prod'
-          // config: 'config.rb'
-        }
+        // options: {
+        //   generatedImagesDir: '<%= yeoman.dist %>/images/generated',
+        //   environment: 'prod'
+        //   // config: 'config.rb'
+        // }
       },
       server: {
         options: {
