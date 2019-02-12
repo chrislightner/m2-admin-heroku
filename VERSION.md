@@ -1,3 +1,8 @@
+#1.2.3
+--
+2/12/19  
+* Upgrading packages to remove buld errors
+
 #1.2.2
 --
 2/12/19  
