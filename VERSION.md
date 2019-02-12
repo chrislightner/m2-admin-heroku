@@ -1,3 +1,8 @@
+#1.2.4
+--
+2/12/19  
+* Upgrading gruntfile.js to remove build errors
+
 #1.2.3
 --
 2/12/19  

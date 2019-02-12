@@ -161,12 +161,18 @@ module.exports = function (grunt) {
       },
       dist: {
         options: {
-          generatedImagesDir: '<%= yeoman.dist %>/images/generated'
+          generatedImagesDir: '<%= yeoman.dist %>/images/generated',
+          environment: 'prod'
+          // config: 'config.rb'
         }
       },
       server: {
         options: {
-          debugInfo: true
+          debugInfo: false,
+          // config: 'config.rb',
+          environment: 'dev',
+          trace: false,
+          sourcemap: true
         }
       }
     },
@@ -405,20 +411,57 @@ module.exports = function (grunt) {
     'karma'
   ]);
 
-  grunt.registerTask('build', [
-    'clean:dist',
-    'useminPrepare',
-    'concurrent:dist',
-    'autoprefixer',
-    'concat',
-    'ngmin',
-    'copy:dist',
-    'cdnify',
-    'cssmin',
-    'uglify',
-    'rev',
-    'usemin'
-  ]);
+  // grunt.registerTask('build', [
+  //   'clean:dist',
+  //   'useminPrepare',
+  //   'concurrent:dist',
+  //   'autoprefixer',
+  //   'concat',
+  //   'ngmin',
+  //   'copy:dist',
+  //   'cdnify',
+  //   'cssmin',
+  //   'uglify',
+  //   'rev',
+  //   'usemin'
+  // ]);
+
+    // Dist builder runs, then connect:dist:keepalive
+    grunt.registerTask('build', function(target) {
+      if (target === 'prod') {
+        return grunt.task.run([
+          'clean:dist',
+          'ngconstant:prod',
+          'useminPrepare',
+          'concurrent:dist',
+          'autoprefixer',
+          'concat',
+          'ngmin',
+          'copy:dist',
+          'cdnify',
+          'cssmin',
+          'uglify',
+          'rev',
+          'usemin'
+        ]);
+      } else {
+        return grunt.task.run([
+          'clean:dist',
+          'ngconstant:dev',
+          'useminPrepare',
+          'concurrent:dist',
+          'autoprefixer',
+          'concat',
+          'ngmin',
+          'copy:dist',
+          'cdnify',
+          'cssmin',
+          'uglify',
+          'rev',
+          'usemin'
+        ]);
+      }
+    });
 
   grunt.registerTask('deploy', function(target) {
     if (target === 'dev') {
