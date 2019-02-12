@@ -161,6 +161,8 @@ module.exports = function (grunt) {
       },
       dist: {
         options: {
+          //importPath: ['bower_components/foundation/scss'],
+          raw: 'add_import_path "bower_components/foundation/scss" \n',
           generatedImagesDir: '<%= yeoman.dist %>/images/generated',
           environment: 'prod'
           // config: 'config.rb'
