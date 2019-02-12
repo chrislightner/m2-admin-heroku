@@ -5,8 +5,6 @@ angular.module('m2AdminApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'ngRoute',
-  'ngResource',
   'ui.bootstrap',
   'ngAnimate',
   'textAngular',
