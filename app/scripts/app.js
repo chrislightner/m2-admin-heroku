@@ -9,7 +9,8 @@ angular.module('m2AdminApp', [
   'ngResource',
   'ui.bootstrap',
   'ngAnimate',
-  'textAngular'
+  'textAngular',
+  'Constants'
 ])
   .config(function($routeProvider){
     $routeProvider

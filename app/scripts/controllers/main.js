@@ -4,15 +4,15 @@ angular.module('m2AdminApp')
 
 .controller('IndexCtrl', function(){
 })
-//coveragedetails.net/api/index.php/
-.controller('LoginCtrl', function($scope, $http, $log, $location){
+
+.controller('LoginCtrl', function($scope, $http, $log, $location, Constants){
 
 	$scope.checkLogin = function(credentials){
-		$http.post('//coveragedetails.net/api/index.php/login', credentials)
+		$http.post(Constants.API_URL + 'login', credentials)
 			.success(function(data){
 				$log.info(data);
 				if(data.status === 'success'){
-					$http.get('//coveragedetails.net/api/index.php/users/' + data.username)
+					$http.get(Constants.API_URL + 'users/' + data.username)
 						.success(function(data){
 							$scope.currentUser = data;
 						})
@@ -32,12 +32,12 @@ angular.module('m2AdminApp')
 	};
 
 })
-.controller('CampaignsCtrl', function($scope, $http, $routeParams, $log){
+.controller('CampaignsCtrl', function($scope, $http, $routeParams, $log, Constants){
 
 	$scope.campaignSort = "jobNumber";
-	$scope.campaignSortReverse = false;
+  $scope.campaignSortReverse = false;
 
-	$http.get('//coveragedetails.net/api/index.php/campaigns/campaignAll/')
+	$http.get(Constants.API_URL + 'campaigns/campaignAll/')
 		.success(function(data){
 			data.forEach(function(e){
 				e.groupShortName = e.group.shortName;
@@ -50,12 +50,12 @@ angular.module('m2AdminApp')
 			$log.info(data);
 		});
 
-    $http.get('//coveragedetails.net/api/index.php/groups')
+    $http.get(Constants.API_URL + 'groups')
       .success(function(groups){
         $scope.groups = groups;
       });
 
-    $http.get('//coveragedetails.net/api/index.php/products')
+    $http.get(Constants.API_URL + 'products')
       .success(function(products){
         $scope.products = products;
       });
@@ -86,9 +86,9 @@ angular.module('m2AdminApp')
     };
 
 })
-.controller('CampaignCtrl', function($scope, $http, $routeParams, $log, $location, $modal, $filter){
+.controller('CampaignCtrl', function($scope, $http, $routeParams, $log, $location, $modal, $filter, Constants){
 
-	$http.get('//coveragedetails.net/api/index.php/campaigns/campaignAllById/' + $routeParams.campaignid)
+	$http.get(Constants.API_URL + 'campaigns/campaignAllById/' + $routeParams.campaignid)
 		.success(function(data){
 			$scope.campaign = data;
 		})
@@ -96,7 +96,7 @@ angular.module('m2AdminApp')
 			$log.info(data);
 		});
 
-	$http.get('//coveragedetails.net/api/index.php/groups')
+	$http.get(Constants.API_URL + 'groups')
 		.success(function(data){
 			$scope.groups = data;
 		})
@@ -104,7 +104,7 @@ angular.module('m2AdminApp')
 			$log.info(data);
 		});
 
-	$http.get('//coveragedetails.net/api/index.php/products')
+	$http.get(Constants.API_URL + 'products')
 		.success(function(data){
 			$scope.products = data;
 		})
@@ -120,7 +120,7 @@ angular.module('m2AdminApp')
 
 		console.log(campaign);
 
-		$http.put('//coveragedetails.net/api/index.php/campaigns', campaign)
+		$http.put(Constants.API_URL + 'campaigns', campaign)
 			.success(function(data){
 				$log.info('Saved ', data);
 				$location.url('/campaigns');
@@ -146,7 +146,7 @@ angular.module('m2AdminApp')
 
 			if(deleteVerify === 'delete'){
 				//using $http.delete() throws a parse error in IE8, use $http['delete'] instead
-				$http['delete']('//coveragedetails.net/api/index.php/campaigns/' + $scope.campaign.id )
+				$http['delete'](Constants.API_URL + 'campaigns/' + $scope.campaign.id )
 				.success(function(data){
 					console.log(data);
 					$location.url('/campaigns');
@@ -179,7 +179,7 @@ angular.module('m2AdminApp')
 			campaign.isInDevelopment = 1;
 
 			// create the campaign
-			$http.post('//coveragedetails.net/api/index.php/campaigns/new', campaign)
+			$http.post(Constants.API_URL + 'campaigns/new', campaign)
 				.success(function(data){
 					$log.info('Saved ', data);
 					$location.url('/campaigns');
@@ -191,11 +191,11 @@ angular.module('m2AdminApp')
 		} else {
 			alert("Please fill out the form");
 		}
-		
+
 	};
 
 })
-.controller('deleteCampaignModalCtrl', function($scope, $log, $modalInstance, campaign){
+.controller('deleteCampaignModalCtrl', function($scope, $log, $modalInstance, campaign, Constants){
 
 		$scope.campaign = campaign;
 
@@ -207,9 +207,9 @@ angular.module('m2AdminApp')
 		};
 
 })
-.controller('CreateCampaignCtrl', function($scope, $http, $routeParams, $log, $location, $filter){
+.controller('CreateCampaignCtrl', function($scope, $http, $routeParams, $log, $location, $filter, Constants){
 
-	// $http.get('//coveragedetails.net/api/index.php/campaigns')
+	// $http.get(Constants.API_URL + 'campaigns')
 	// 	.success(function(data){
 	// 		$scope.campaigns = data;
 	// 	})
@@ -221,7 +221,7 @@ angular.module('m2AdminApp')
 		$scope.campaign.shortName = $filter('jobNumberToShortName')($scope.campaign.jobNumber);
 	}
 
-	$http.get('//coveragedetails.net/api/index.php/groups')
+	$http.get(Constants.API_URL + 'groups')
 		.success(function(data){
 			$scope.groups = data;
 		})
@@ -229,7 +229,7 @@ angular.module('m2AdminApp')
 			$log.info(data);
 		});
 
-	$http.get('//coveragedetails.net/api/index.php/products')
+	$http.get(Constants.API_URL + 'products')
 		.success(function(data){
 			$scope.products = data;
 		})
@@ -245,7 +245,7 @@ angular.module('m2AdminApp')
 		} else if ($("#segmentio-id").val() == "") {
 			alert("Please enter a Segment.io ID");
 		} else { // success
-			$http.post('//coveragedetails.net/api/index.php/campaigns/new', campaign)
+			$http.post(Constants.API_URL + 'campaigns/new', campaign)
 			.success(function(data){
 				$log.info('Saved ', data);
 				$location.url('/campaigns');
@@ -258,9 +258,9 @@ angular.module('m2AdminApp')
 	};
 
 })
-.controller('GroupsCtrl', function($scope, $http, $routeParams, $log){
+.controller('GroupsCtrl', function($scope, $http, $routeParams, $log, Constants){
 
-	$http.get('//coveragedetails.net/api/index.php/groups')
+	$http.get(Constants.API_URL + 'groups')
 	.success(function(data){
 		$scope.groups = data;
 	})
@@ -269,9 +269,9 @@ angular.module('m2AdminApp')
 	});
 
 })
-.controller('GroupCtrl', function($scope, $http, $routeParams, $log, $location, $modal){
+.controller('GroupCtrl', function($scope, $http, $routeParams, $log, $location, $modal, Constants){
 
-	$http.get('//coveragedetails.net/api/index.php/groups/' + $routeParams.groupShortName)
+	$http.get(Constants.API_URL + 'groups/' + $routeParams.groupShortName)
 		.success(function(data){
 			$scope.group = data;
 		})
@@ -279,7 +279,7 @@ angular.module('m2AdminApp')
 			$log.info(data);
 		});
 
-	$http.get('//coveragedetails.net/api/index.php/tpas')
+	$http.get(Constants.API_URL + 'tpas')
 		.success(function(data){
 			$scope.tpas = data;
 		})
@@ -288,7 +288,7 @@ angular.module('m2AdminApp')
 		});
 
 	$scope.saveGroup = function(group){
-		$http.put('//coveragedetails.net/api/index.php/groups', group)
+		$http.put(Constants.API_URL + 'groups', group)
 			.success(function(data){
 				$log.info('Saved ', data);
 				$location.url('/groups');
@@ -313,7 +313,7 @@ angular.module('m2AdminApp')
 		modalInstance.result.then(function (deleteVerify){
 			if(deleteVerify === 'delete'){
 				//using $http.delete() throws a parse error in IE8, use $http['delete'] instead
-				$http['delete']('//coveragedetails.net/api/index.php/groups/' + $scope.group.id ).success(function(){
+				$http['delete'](Constants.API_URL + 'groups/' + $scope.group.id ).success(function(){
 					$location.url('/groups');
 				})
 				.error(function(data){
@@ -326,7 +326,7 @@ angular.module('m2AdminApp')
 	};
 
 })
-.controller('deleteGroupModalCtrl', function($scope, $log, $modalInstance, group){
+.controller('deleteGroupModalCtrl', function($scope, $log, $modalInstance, group, Constants){
 
 	$scope.group = group;
 
@@ -338,9 +338,9 @@ angular.module('m2AdminApp')
 	};
 
 })
-.controller('CreateGroupCtrl', function($scope, $http, $routeParams, $log, $location){
+.controller('CreateGroupCtrl', function($scope, $http, $routeParams, $log, $location, Constants){
 
-	$http.get('//coveragedetails.net/api/index.php/tpas')
+	$http.get(Constants.API_URL + 'tpas')
 		.success(function(data){
 			$scope.tpas = data;
 		})
@@ -349,7 +349,7 @@ angular.module('m2AdminApp')
 		});
 
 	$scope.submitCreateGroup = function(group){
-		$http.post('//coveragedetails.net/api/index.php/groups/new', group)
+		$http.post(Constants.API_URL + 'groups/new', group)
 			.success(function(data){
 				$log.info('Saved ', data);
 				$location.url('/groups');
@@ -360,9 +360,9 @@ angular.module('m2AdminApp')
 	};
 
 })
-.controller('ProductsCtrl', function($scope, $http, $routeParams, $log){
+.controller('ProductsCtrl', function($scope, $http, $routeParams, $log, Constants){
 
-	$http.get('//coveragedetails.net/api/index.php/products')
+	$http.get(Constants.API_URL + 'products')
 	.success(function(data){
 		$scope.products = data;
 	})
@@ -371,16 +371,16 @@ angular.module('m2AdminApp')
 	});
 
 })
-.controller('ProductCtrl', function($scope, $http, $routeParams, $log, $location, $modal){
+.controller('ProductCtrl', function($scope, $http, $routeParams, $log, $location, $modal, Constants){
 
-	$http.get('//coveragedetails.net/api/index.php/products/' + $routeParams.productShortName)
+	$http.get(Constants.API_URL + 'products/' + $routeParams.productShortName)
 		.success(function(data){
 			$scope.product = data;
 		});
 
 	$scope.saveProduct = function(product){
 
-		$http.put('//coveragedetails.net/api/index.php/products', product)
+		$http.put(Constants.API_URL + 'products', product)
 			.success(function(data){
 				$log.info('Saved ', data);
 				$location.url('/products');
@@ -405,7 +405,7 @@ angular.module('m2AdminApp')
 		modalInstance.result.then(function (deleteVerify){
 			if(deleteVerify === 'delete'){
 				//using $http.delete() throws a parse error in IE8, use $http['delete'] instead
-				$http['delete']('//coveragedetails.net/api/index.php/products/' + $scope.product.id )
+				$http['delete'](Constants.API_URL + 'products/' + $scope.product.id )
 					.success(function(){
 						$location.url('/products');
 					})
@@ -420,7 +420,7 @@ angular.module('m2AdminApp')
 	};
 
 })
-.controller('deleteProductModalCtrl', function($scope, $log, $modalInstance, product){
+.controller('deleteProductModalCtrl', function($scope, $log, $modalInstance, product, Constants){
 
 	$scope.product = product;
 
@@ -432,13 +432,13 @@ angular.module('m2AdminApp')
 	};
 
 })
-.controller('CreateProductCtrl', function($scope, $http, $routeParams, $log, $location){
+.controller('CreateProductCtrl', function($scope, $http, $routeParams, $log, $location, Constants){
 
 	$scope.submitCreateProduct = function(product){
 
 		$log.info(product);
 
-		$http.post('//coveragedetails.net/api/index.php/products/new', product)
+		$http.post(Constants.API_URL + 'products/new', product)
 			.success(function(data){
 				$log.info('Saved ', data);
 				$location.url('/products');
@@ -450,28 +450,28 @@ angular.module('m2AdminApp')
 	};
 
 })
-.controller('UsersCtrl', function($scope, $http){
+.controller('UsersCtrl', function($scope, $http, Constants){
 
-	$http.get('//coveragedetails.net/api/index.php/users').success(function(data){
+	$http.get(Constants.API_URL + 'users').success(function(data){
 		$scope.users = data;
 	});
 
 })
-.controller('UserCtrl', function($scope, $http, $routeParams, $log, $location, $modal){
+.controller('UserCtrl', function($scope, $http, $routeParams, $log, $location, $modal, Constants){
 
-	$http.get('//coveragedetails.net/api/index.php/users/' + $routeParams.username)
+	$http.get(Constants.API_URL + 'users/' + $routeParams.username)
 		.success(function(data){
 			$scope.user = data;
 		});
 
-	$http.get('//coveragedetails.net/api/index.php/userRoles')
+	$http.get(Constants.API_URL + 'userRoles')
 		.success(function(data){
 			$scope.roles = data;
 		});
 
 	$scope.saveUser = function(user){
 
-		$http.put('//coveragedetails.net/api/index.php/users', user)
+		$http.put(Constants.API_URL + 'users', user)
 			.success(function(data){
 				$log.info('Saved ', data);
 				$location.url('/users');
@@ -496,7 +496,7 @@ angular.module('m2AdminApp')
 		modalInstance.result.then(function (deleteVerify){
 			if(deleteVerify === 'delete'){
 				//using $http.delete() throws a parse error in IE8, use $http['delete'] instead
-				$http['delete']('//coveragedetails.net/api/index.php/users/' + $scope.user.id )
+				$http['delete'](Constants.API_URL + 'users/' + $scope.user.id )
 				.success(function(){
 					$location.url('/users');
 				})
@@ -510,7 +510,7 @@ angular.module('m2AdminApp')
 	};
 
 })
-.controller('deleteUserModalCtrl', function($scope, $log, $modalInstance, user){
+.controller('deleteUserModalCtrl', function($scope, $log, $modalInstance, user, Constants){
 
 	$scope.user = user;
 
@@ -522,9 +522,9 @@ angular.module('m2AdminApp')
 	};
 
 })
-.controller('CreateUserCtrl', function($scope, $http, $routeParams, $log, $location){
+.controller('CreateUserCtrl', function($scope, $http, $routeParams, $log, $location, Constants){
 
-	$http.get('//coveragedetails.net/api/index.php/userRoles')
+	$http.get(Constants.API_URL + 'userRoles')
 		.success(function(data){
 			$scope.roles = data;
 		})
@@ -534,7 +534,7 @@ angular.module('m2AdminApp')
 
 	$scope.submitCreateUser = function(user){
 
-		$http.post('//coveragedetails.net/api/index.php/users/new', user)
+		$http.post(Constants.API_URL + 'users/new', user)
 			.success(function(data){
 				$log.info('Saved ', data);
 				$location.url('/users');
