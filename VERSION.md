@@ -1,4 +1,4 @@
-#1.2.7 (Not Released)
+#1.2.7 (Released)
 --
 2/13/19
 * Fixing ambiguous build command in grunt file
