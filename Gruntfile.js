@@ -410,7 +410,7 @@ module.exports = function (grunt) {
 
   grunt.task.run([
       'clean:server',
-      'ngconstant:prod',
+      'ngconstant:dev',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
@@ -491,7 +491,7 @@ module.exports = function (grunt) {
       ]);
     }else if(target === "prod"){
       return grunt.task.run([
-        'build',
+        'build:prod',
         'ftpush:prod'
       ]);
     }

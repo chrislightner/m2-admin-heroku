@@ -1,3 +1,10 @@
+#1.2.7 (Released)
+--
+2/13/19
+* Fixing ambiguous build command in grunt file
+
+---
+
 #1.2.6 (Hotfix)
 --
 2/13/19
