@@ -491,7 +491,7 @@ module.exports = function (grunt) {
       ]);
     }else if(target === "prod"){
       return grunt.task.run([
-        'build',
+        'build:prod',
         'ftpush:prod'
       ]);
     }
