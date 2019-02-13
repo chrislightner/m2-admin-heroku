@@ -1,3 +1,10 @@
+#1.2.6 (Hotfix)
+--
+2/13/19
+* Setting default API call to prod
+
+---
+
 #1.2.5
 --
 2/13/19
