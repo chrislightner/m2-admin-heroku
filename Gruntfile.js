@@ -410,6 +410,7 @@ module.exports = function (grunt) {
 
   grunt.task.run([
       'clean:server',
+      'ngconstant:prod',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
@@ -450,6 +451,7 @@ module.exports = function (grunt) {
       if (target === 'prod') {
         return grunt.task.run([
           'clean:dist',
+          'ngconstant:prod',
           'useminPrepare',
           'concurrent:dist',
           'autoprefixer',
@@ -465,6 +467,7 @@ module.exports = function (grunt) {
       } else {
         return grunt.task.run([
           'clean:dist',
+          'ngconstant:dev',
           'useminPrepare',
           'concurrent:dist',
           'autoprefixer',
