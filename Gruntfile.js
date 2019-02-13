@@ -357,6 +357,25 @@ module.exports = function (grunt) {
       }
     },
 
+    // Allows setting and using of constants in the angular app
+    // Used for setting dev vs production variables
+    ngconstant: {
+      options: {
+        dest: 'app/scripts/config/constants.js',
+        name: 'Constants'
+      },
+      dev: {
+        constants: {
+          Constants: grunt.file.readJSON('app/scripts/config/dev.json')
+        }
+      },
+      prod: {
+        constants: {
+          Constants: grunt.file.readJSON('app/scripts/config/prod.json')
+        }
+      }
+    },
+
     ftpush: {
       dev: {
         auth: {
