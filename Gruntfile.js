@@ -160,13 +160,19 @@ module.exports = function (grunt) {
         assetCacheBuster: false
       },
       dist: {
-        options: {
-          generatedImagesDir: '<%= yeoman.dist %>/images/generated'
-        }
+        // options: {
+        //   generatedImagesDir: '<%= yeoman.dist %>/images/generated',
+        //   environment: 'prod'
+        //   // config: 'config.rb'
+        // }
       },
       server: {
         options: {
-          debugInfo: true
+          debugInfo: false,
+          // config: 'config.rb',
+          environment: 'dev',
+          trace: false,
+          sourcemap: true
         }
       }
     },
@@ -205,16 +211,16 @@ module.exports = function (grunt) {
     },
 
     // The following *-min tasks produce minified files in the dist folder
-    // imagemin: {
-    //   dist: {
-    //     files: [{
-    //       expand: true,
-    //       cwd: '<%= yeoman.app %>/images',
-    //       src: '{,*/}*.{png,jpg,jpeg,gif}',
-    //       dest: '<%= yeoman.dist %>/images'
-    //     }]
-    //   }
-    // },
+    imagemin: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.app %>/images',
+          src: '{,*/}*.{png,jpg,jpeg,gif}',
+          dest: '<%= yeoman.dist %>/images'
+        }]
+      }
+    },
     svgmin: {
       dist: {
         files: [{
@@ -309,9 +315,9 @@ module.exports = function (grunt) {
         'copy:styles'
       ],
       dist: [
-        'compass:dist',
+        //'compass:dist',
         'copy:styles',
-        //'imagemin',
+        'imagemin',
         'svgmin',
         'htmlmin'
       ]
@@ -351,6 +357,25 @@ module.exports = function (grunt) {
       }
     },
 
+    // Allows setting and using of constants in the angular app
+    // Used for setting dev vs production variables
+    ngconstant: {
+      options: {
+        dest: 'app/scripts/config/constants.js',
+        name: 'Constants'
+      },
+      dev: {
+        constants: {
+          Constants: grunt.file.readJSON('app/scripts/config/dev.json')
+        }
+      },
+      prod: {
+        constants: {
+          Constants: grunt.file.readJSON('app/scripts/config/prod.json')
+        }
+      }
+    },
+
     ftpush: {
       dev: {
         auth: {
@@ -385,6 +410,7 @@ module.exports = function (grunt) {
 
   grunt.task.run([
       'clean:server',
+      'ngconstant:prod',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
@@ -405,20 +431,57 @@ module.exports = function (grunt) {
     'karma'
   ]);
 
-  grunt.registerTask('build', [
-    'clean:dist',
-    'useminPrepare',
-    'concurrent:dist',
-    'autoprefixer',
-    'concat',
-    'ngmin',
-    'copy:dist',
-    'cdnify',
-    'cssmin',
-    'uglify',
-    'rev',
-    'usemin'
-  ]);
+  // grunt.registerTask('build', [
+  //   'clean:dist',
+  //   'useminPrepare',
+  //   'concurrent:dist',
+  //   'autoprefixer',
+  //   'concat',
+  //   'ngmin',
+  //   'copy:dist',
+  //   'cdnify',
+  //   'cssmin',
+  //   'uglify',
+  //   'rev',
+  //   'usemin'
+  // ]);
+
+    // Dist builder runs, then connect:dist:keepalive
+    grunt.registerTask('build', function(target) {
+      if (target === 'prod') {
+        return grunt.task.run([
+          'clean:dist',
+          'ngconstant:prod',
+          'useminPrepare',
+          'concurrent:dist',
+          'autoprefixer',
+          'concat',
+          'ngmin',
+          'copy:dist',
+          'cdnify',
+          'cssmin',
+          'uglify',
+          'rev',
+          'usemin'
+        ]);
+      } else {
+        return grunt.task.run([
+          'clean:dist',
+          'ngconstant:dev',
+          'useminPrepare',
+          'concurrent:dist',
+          'autoprefixer',
+          'concat',
+          'ngmin',
+          'copy:dist',
+          'cdnify',
+          'cssmin',
+          'uglify',
+          'rev',
+          'usemin'
+        ]);
+      }
+    });
 
   grunt.registerTask('deploy', function(target) {
     if (target === 'dev') {

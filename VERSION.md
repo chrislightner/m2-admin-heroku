@@ -1,3 +1,17 @@
+#1.2.5
+--
+2/13/19
+* Initializing git flow
+* Merging build updates into master
+
+---
+
+Turning imagemin back on...
+
+Several commits working on build...
+
+---
+
 #1.2.1
 --
 2/12/19  
