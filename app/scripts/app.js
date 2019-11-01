@@ -1,16 +1,16 @@
 'use strict';
 
 angular.module('m2AdminApp', [
-  'ngCookies',
-  'ngResource',
-  'ngSanitize',
-  'ngRoute',
-  'ui.bootstrap',
-  'ngAnimate',
-  'textAngular',
-  'Constants'
-])
-  .config(function($routeProvider){
+    'ngCookies',
+    'ngResource',
+    'ngSanitize',
+    'ngRoute',
+    'ui.bootstrap',
+    'ngAnimate',
+    'textAngular',
+    'Constants'
+  ])
+  .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         redirectTo: '/login'
@@ -67,11 +67,13 @@ angular.module('m2AdminApp', [
         templateUrl: 'views/edit-user.html',
         controller: 'UserCtrl'
       }).
-      otherwise({redirectTo: '/login'});
+    otherwise({
+      redirectTo: '/login'
+    });
   })
-  .run(function($rootScope, $http, $log, $window, $location) {
+  .run(function ($rootScope, $http, $log, $window, $location) {
 
-    $rootScope.logout = function(){
+    $rootScope.logout = function () {
       $log.warn("Logged Out");
       docCookies.removeItem("zgAuth");
       docCookies.removeItem("zgAuth-user");
@@ -80,7 +82,12 @@ angular.module('m2AdminApp', [
     }
 
     $rootScope.textAngularOpts = {
-      toolbar: [['bold', 'italics', 'h1', 'h2', 'h3'], ['ul', 'ol'],['undo', 'redo'], ['html', 'insertLink']],
+      toolbar: [
+        ['bold', 'italics', 'h1', 'h2', 'h3'],
+        ['ul', 'ol'],
+        ['undo', 'redo'],
+        ['html', 'insertLink']
+      ],
       classes: {
         toolbar: 'btn-toolbar',
         toolbarGroup: 'btn-group',
@@ -91,52 +98,66 @@ angular.module('m2AdminApp', [
       }
     };
 
-    var checkLogin = function(){
+    var checkLogin = function () {
       var username = docCookies.getItem("zgAuth-user");
       var token = docCookies.getItem("zgAuth");
 
       $rootScope.currentUser = {
         "username": username,
         "token": token,
-        "isLoggedIn" : false
+        "isLoggedIn": false
       }
 
-      if($rootScope.currentUser.username){
-        $http.post('//coveragedetails.net/api/index.php/users/check', $rootScope.currentUser)
-          .success(function(data){
-            if(data.status !== "success"){
-              if(data.error == 1){
+      // $rootScope.currentUser = {
+      //   "username": 'chris',
+      //   "token": '$2y$10$.9dOpaQK3pj3yyHgSQ18tekNez3lIJHnw5XJJ2KlvBt9lVPWvbTNe',
+      //   "isLoggedIn": false
+      // }
+
+      // $rootScope.currentUser = {
+      //   "username": 'chris',
+      //   "token": '$2y$10$XkhdXAbhvY8KTQP3Hu2xpOs.dyOBsSEDSsid4uEyGAMCkl/0CxnGi',
+      //   "isLoggedIn": false
+      // }
+
+      if ($rootScope.currentUser.username) {
+        //$http.post('//coveragedetails.net/api/index.php/users/check', $rootScope.currentUser)
+        $http.post('https://m2-api-heroku.herokuapp.com/index.php/users/check', $rootScope.currentUser)
+          .success(function (data) {
+            if (data.status !== "success") {
+              if (data.error == 1) {
                 $log.warn("Login Expired");
+                $log.warn(data);
                 docCookies.removeItem("zgAuth");
                 docCookies.removeItem("zgAuth-user");
                 $rootScope.currentUser = {};
                 $rootScope.currentUser.loggedIn = false;
                 $location.url("/login");
                 return false;
-              }else{
+              } else {
                 $log.warn("Login Failed");
                 $rootScope.currentUser.isLoggedIn = false;
                 $rootScope.currentUser = {};
                 $location.url("/login");
                 return false;
               }
-            }else{
+            } else {
               $log.info("Login Successful");
               $rootScope.currentUser.role = parseInt(data.role);
               $rootScope.currentUser.isLoggedIn = true;
-              if($location.path() === "/login"){
+              if ($location.path() === "/login") {
                 $location.url("/campaigns");
               }
               return true;
             }
           })
-          .error(function(data){
+          .error(function (data) {
             $log.warn("Error: " + data);
             $rootScope.currentUser = {};
             $location.url("/login");
             return false;
           });
-      }else{
+      } else {
         $log.warn("Not Logged In");
         $rootScope.currentUser.isLoggedIn = false;
         $rootScope.currentUser = {};
