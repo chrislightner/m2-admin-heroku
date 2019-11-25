@@ -11,7 +11,10 @@ angular.module('m2AdminApp')
       console.log(credentials);
       console.log(Constants.API_URL + 'login')
       console.log(credentials);
-      $http.post(Constants.API_URL + 'login', credentials)
+
+      var creds = JSON.stringify(credentials);
+
+      $http.post(Constants.API_URL + 'login', creds)
         .success(function (data) {
           console.log('success');
           console.log(data);
