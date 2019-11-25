@@ -28,6 +28,10 @@ angular.module('m2AdminApp')
           }
         })
         .error(function (data) {
+          console.log(Constants.API_URL + 'login');
+          console.log(credentials);
+          console.log('Error');
+          console.log(data);
           $log.info('Error ', data);
         });
     };
