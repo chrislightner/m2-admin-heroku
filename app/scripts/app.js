@@ -99,6 +99,7 @@ angular.module('m2AdminApp', [
     };
 
     var checkLogin = function () {
+      console.log('checkLogin reporting');
       var username = docCookies.getItem("zgAuth-user");
       var token = docCookies.getItem("zgAuth");
 
