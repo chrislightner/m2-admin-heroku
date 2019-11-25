@@ -11,6 +11,8 @@ angular.module('m2AdminApp')
       console.log(credentials);
       $http.post(Constants.API_URL + 'login', credentials)
         .success(function (data) {
+          console.log('success');
+          console.log(data);
           $log.info(data);
           if (data.status === 'success') {
             $http.get(Constants.API_URL + 'users/' + data.username)
