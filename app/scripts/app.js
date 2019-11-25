@@ -101,7 +101,9 @@ angular.module('m2AdminApp', [
     var checkLogin = function () {
       console.log('checkLogin reporting');
       var username = docCookies.getItem("zgAuth-user");
+      console.log('username: ' + username);
       var token = docCookies.getItem("zgAuth");
+      console.log('token: ' + token);
 
       $rootScope.currentUser = {
         "username": username,
