@@ -9,6 +9,8 @@ angular.module('m2AdminApp')
     $scope.checkLogin = function (credentials) {
       console.log('$scope.checkLogin');
       console.log(credentials);
+      console.log(Constants.API_URL + 'login')
+      console.log(credentials);
       $http.post(Constants.API_URL + 'login', credentials)
         .success(function (data) {
           console.log('success');
