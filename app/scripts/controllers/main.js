@@ -7,19 +7,11 @@ angular.module('m2AdminApp')
   .controller('LoginCtrl', function ($scope, $http, $log, $location, Constants) {
 
     $scope.checkLogin = function (credentials) {
-      console.log('$scope.checkLogin');
-      console.log(credentials);
-      console.log(Constants.API_URL + 'login')
-      console.log(credentials);
 
       var creds = JSON.stringify(credentials);
 
-      console.log(creds);
-
       $http.post(Constants.API_URL + 'login', creds)
         .success(function (data) {
-          console.log('success');
-          console.log(data);
           $log.info(data);
           if (data.status === 'success') {
             $http.get(Constants.API_URL + 'users/' + data.username)
@@ -37,10 +29,6 @@ angular.module('m2AdminApp')
           }
         })
         .error(function (data) {
-          console.log(Constants.API_URL + 'login');
-          console.log(credentials);
-          console.log('Error');
-          console.log(data);
           $log.info('Error ', data);
         });
     };
@@ -58,7 +46,6 @@ angular.module('m2AdminApp')
           e.productShortName = e.product.shortName;
         });
         $scope.campaigns = data;
-        console.log(data);
       })
       .error(function (data) {
         $log.info(data);
@@ -80,16 +67,12 @@ angular.module('m2AdminApp')
     }
 
     $scope.$watch('campaignFilter.groupShortName', function (newValue) {
-      // console.log(newValue, oldValue);
-      console.log(newValue);
       if (newValue === null) {
         $scope.campaignFilter.groupShortName = '';
       }
     });
 
     $scope.$watch('campaignFilter.productShortName', function (newValue) {
-      // console.log(newValue, oldValue);
-      console.log(newValue);
       if (newValue === null) {
         $scope.campaignFilter.productShortName = '';
       }
@@ -132,8 +115,6 @@ angular.module('m2AdminApp')
 
     $scope.saveCampaign = function (campaign) {
 
-      console.log(campaign);
-
       $http.put(Constants.API_URL + 'campaigns', campaign)
         .success(function (data) {
           $log.info('Saved ', data);
@@ -162,7 +143,6 @@ angular.module('m2AdminApp')
           //using $http.delete() throws a parse error in IE8, use $http['delete'] instead
           $http['delete'](Constants.API_URL + 'campaigns/' + $scope.campaign.id)
             .success(function (data) {
-              console.log(data);
               $location.url('/campaigns');
             })
             .error(function (data) {
