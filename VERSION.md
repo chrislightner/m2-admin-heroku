@@ -1,3 +1,17 @@
+#1.2.9 (Released)
+--
+2/17/2023
+* Trying to fix build error when upgrading
+
+---
+
+#1.2.8 (Released)
+--
+8/5/2022
+* triggering build after upgrading Heroku stack
+
+---
+
 #1.2.7 (Released)
 --
 2/13/19

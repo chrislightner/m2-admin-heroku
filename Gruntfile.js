@@ -487,7 +487,7 @@ module.exports = function (grunt) {
     if (target === 'dev') {
       return grunt.task.run([
         'build',
-        'ftpush:dev'
+        //'ftpush:dev'
       ]);
     }else if(target === "prod"){
       return grunt.task.run([
