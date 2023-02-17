@@ -1,4 +1,4 @@
-#1.2.9 (Not Released)
+#1.2.9 (Released)
 --
 2/17/2023
 * Trying to fix build error when upgrading
