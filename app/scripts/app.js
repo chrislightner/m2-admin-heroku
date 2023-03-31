@@ -126,6 +126,7 @@ angular.module('m2AdminApp', [
       if ($rootScope.currentUser.username) {
         //$http.post('//coveragedetails.net/api/index.php/users/check', $rootScope.currentUser)
         $http.post('https://api.coveragedetails.net/index.php/users/check', $rootScope.currentUser)
+        // $http.post('https://m2-api-nest-test.herokuapp.com/', $rootScope.currentUser)
           .success(function (data) {
             if (data.status !== "success") {
               if (data.error == 1) {
