@@ -125,12 +125,13 @@ angular.module('m2AdminApp', [
 
       if ($rootScope.currentUser.username) {
         //$http.post('//coveragedetails.net/api/index.php/users/check', $rootScope.currentUser)
-        //$http.post('https://api.coveragedetails.net/index.php/users/check', $rootScope.currentUser)
-        $http.post('https://m2-api-nest-test.herokuapp.com/users/check', $rootScope.currentUser)
+        $http.post('https://api.coveragedetails.net/index.php/users/check', $rootScope.currentUser)
+        //$http.post('https://m2-api-nest-test.herokuapp.com/users/check', $rootScope.currentUser)
           .success(function (data) {
             if (data.status !== "success") {
               if (data.error == 1) {
                 $log.warn("Login Expired");
+                console.log("Login Expired")
                 $log.warn(data);
                 docCookies.removeItem("zgAuth");
                 docCookies.removeItem("zgAuth-user");
@@ -140,6 +141,7 @@ angular.module('m2AdminApp', [
                 return false;
               } else {
                 $log.warn("Login Failed");
+                console.log("Login Failed");
                 $rootScope.currentUser.isLoggedIn = false;
                 $rootScope.currentUser = {};
                 $location.url("/login");
@@ -147,6 +149,7 @@ angular.module('m2AdminApp', [
               }
             } else {
               $log.info("Login Successful");
+              console.log("Login Successful");
               $rootScope.currentUser.role = parseInt(data.role);
               $rootScope.currentUser.isLoggedIn = true;
               if ($location.path() === "/login") {
