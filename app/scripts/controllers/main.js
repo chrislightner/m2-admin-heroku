@@ -337,15 +337,10 @@ angular.module('m2AdminApp')
   })
   .controller('CreateGroupCtrl', function ($scope, $http, $routeParams, $log, $location, Constants) {
 
-    $http.get(Constants.API_URL + 'tpas')
-      .success(function (data) {
-        $scope.tpas = data;
-      })
-      .error(function (data) {
-        $log.info(data);
-      });
-
     $scope.submitCreateGroup = function (group) {
+
+      $log.info(group);
+
       $http.post(Constants.API_URL + 'groups/new', group)
         .success(function (data) {
           $log.info('Saved ', data);
