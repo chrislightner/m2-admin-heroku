@@ -376,7 +376,8 @@ angular.module('m2AdminApp')
       });
 
     $scope.saveProduct = function (product) {
-
+      console.log('ProductCtrl, saveProduct()');
+      console.log(product);
       $http.put(Constants.API_URL + 'products', product)
         .success(function (data) {
           $log.info('Saved ', data);
@@ -384,6 +385,7 @@ angular.module('m2AdminApp')
         })
         .error(function (data) {
           $log.info('Error ', data);
+          console.log('Error ', data);
         });
     };
 
