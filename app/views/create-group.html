@@ -51,9 +51,13 @@
                         <option value="">-- choose tpa --</option>
                     </select> -->
 
-                    <select name="tpa" id="tpa" class="form-control" ng-model="group.tpa"ng-required="true">
+                    <!-- <select name="tpa" id="tpa" class="form-control" ng-model="group.tpa"ng-required="true">
                         <option value="">-- choose tpa --</option>
                         <option value="{{tpa.id}}" ng-repeat="tpa in tpas">{{tpa.name}}</option>
+                    </select> -->
+
+                    <select name="tpa" id="tpa" class="form-control" ng-model="group.tpa" ng-options="tpa.id as tpa.name for tpa in tpas">
+                      <option value="">-- choose tpa --</option>
                     </select>
 
                     </div>
