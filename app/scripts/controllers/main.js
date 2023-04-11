@@ -337,9 +337,18 @@ angular.module('m2AdminApp')
   })
   .controller('CreateGroupCtrl', function ($scope, $http, $routeParams, $log, $location, Constants) {
 
+    $http.get(Constants.API_URL + 'tpas')
+      .success(function (data) {
+        $scope.tpas = data;
+      })
+      .error(function (data) {
+        $log.info(data);
+      });
+
     $scope.submitCreateGroup = function (group) {
 
       $log.info(group);
+      console.log(group);
 
       $http.post(Constants.API_URL + 'groups/new', group)
         .success(function (data) {
@@ -348,7 +357,26 @@ angular.module('m2AdminApp')
         })
         .error(function (data) {
           $log.info('Error ', data);
+          console.log('Error ', data);
         });
+    };
+
+  })
+    .controller('CreateProductCtrl', function ($scope, $http, $routeParams, $log, $location, Constants) {
+
+    $scope.submitCreateProduct = function (product) {
+
+      $log.info(product);
+
+      $http.post(Constants.API_URL + 'products/new', product)
+        .success(function (data) {
+          $log.info('Saved ', data);
+          $location.url('/products');
+        })
+        .error(function (data) {
+          $log.info('Error ', data);
+        });
+
     };
 
   })
