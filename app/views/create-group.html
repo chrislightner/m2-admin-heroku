@@ -47,9 +47,14 @@
                     <label for="tpa" class="col-lg-4 control-label">TPA</label>
                     <div class="col-lg-8">
 
-                        <select name="tpa" id="tpa" class="form-control" ng-model="group.tpa" ng-options="tpa.name for tpa in tpas" ng-required="true">
-                            <option value="tpa.id">-- choose tpa --</option>
-                        </select>
+                      <!-- <select name="tpa" id="tpa" class="form-control" ng-model="group.tpa" ng-options="tpa.name for tpa in tpas" ng-required="true">
+                        <option value="">-- choose tpa --</option>
+                    </select> -->
+
+                    <select name="tpa" id="tpa" class="form-control" ng-model="group.tpa"ng-required="true">
+                        <option value="">-- choose tpa --</option>
+                        <option value="{{tpa.id}}" ng-repeat="tpa in tpas">{{term.label}}</option>
+                    </select>
 
                     </div>
                 </div>
