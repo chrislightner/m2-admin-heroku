@@ -376,14 +376,15 @@ angular.module('m2AdminApp')
       });
 
     $scope.saveProduct = function (product) {
-
+      console.log(product);
       $http.put(Constants.API_URL + 'products', product)
         .success(function (data) {
           $log.info('Saved ', data);
-          $location.url('/products');
+          //$location.url('/products');
         })
         .error(function (data) {
           $log.info('Error ', data);
+          console.log('Error ', data);
         });
     };
 
@@ -468,13 +469,15 @@ angular.module('m2AdminApp')
 
     $scope.saveUser = function (user) {
 
+      console.log(user);
       $http.put(Constants.API_URL + 'users', user)
         .success(function (data) {
           $log.info('Saved ', data);
-          $location.url('/users');
+          //$location.url('/users');
         })
         .error(function (data) {
           $log.info('Error ', data);
+          console.log('Error ', data);
         });
     };
 
