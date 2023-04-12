@@ -51,12 +51,14 @@ angular.module('m2AdminApp')
             console.log('Issue at group.shortName for');
             console.log(e);
           } else {
+            console.log(e.group.shortName);
             e.groupShortName = e.group.shortName;
           }
           if (e.product.shortName == null) {
             console.log('Issue at product.shortName for');
             console.log(e);
           } else {
+            console.log(e.product.shortName);
             e.productShortName = e.product.shortName;
           }
         });
