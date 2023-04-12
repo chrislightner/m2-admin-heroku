@@ -44,14 +44,19 @@ angular.module('m2AdminApp')
 
     $http.get(Constants.API_URL + 'campaigns/campaignAll/')
       .success(function (data) {
+
+        console.log('----------------------------TRACK 1');
         data.forEach(function (e) {
+          console.log('----------------------------TRACK 2');
           e.groupShortName = e.group.shortName;
           e.productShortName = e.product.shortName;
         });
+        console.log('----------------------------TRACK 3');
         $scope.campaigns = data;
       })
       .error(function (data) {
         $log.info(data);
+        console.log('----------------------------TRACK 4');
       });
 
     $http.get(Constants.API_URL + 'groups')
