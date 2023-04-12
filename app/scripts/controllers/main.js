@@ -47,14 +47,14 @@ angular.module('m2AdminApp')
         console.log('----------------------------TRACK 1');
         data.forEach(function (e) {
           console.log('----------------------------TRACK 2');
-          if (e.group.shortName == null) {
+          if (e.group.shortName === undefined || e.group.shortName === null) {
             console.log('Issue at group.shortName for');
             console.log(e);
           } else {
             console.log(e.group.shortName);
             e.groupShortName = e.group.shortName;
           }
-          if (e.product.shortName == null) {
+          if (e.product.shortName === undefined || e.product.shortName === null) {
             console.log('Issue at product.shortName for');
             console.log(e);
           } else {
