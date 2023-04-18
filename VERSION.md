@@ -1,4 +1,4 @@
-#1.2.10 (Not Released)
+#1.2.10 (RELEASED 4/18/2023)
 --
 4/18/2023
 * Merging in a few fixes while testing new API
