@@ -10,6 +10,9 @@ angular.module('m2AdminApp')
 
       var creds = JSON.stringify(credentials);
 
+      console.log('creds');
+      console.log(creds);
+
       $http.post(Constants.API_URL + 'login', creds)
         .success(function (data) {
           $log.info(data);
@@ -343,6 +346,10 @@ angular.module('m2AdminApp')
       });
 
     $scope.submitCreateGroup = function (group) {
+
+      $log.info(group);
+      console.log(group);
+
       $http.post(Constants.API_URL + 'groups/new', group)
         .success(function (data) {
           $log.info('Saved ', data);
@@ -350,7 +357,26 @@ angular.module('m2AdminApp')
         })
         .error(function (data) {
           $log.info('Error ', data);
+          console.log('Error ', data);
         });
+    };
+
+  })
+    .controller('CreateProductCtrl', function ($scope, $http, $routeParams, $log, $location, Constants) {
+
+    $scope.submitCreateProduct = function (product) {
+
+      $log.info(product);
+
+      $http.post(Constants.API_URL + 'products/new', product)
+        .success(function (data) {
+          $log.info('Saved ', data);
+          $location.url('/products');
+        })
+        .error(function (data) {
+          $log.info('Error ', data);
+        });
+
     };
 
   })
@@ -373,7 +399,8 @@ angular.module('m2AdminApp')
       });
 
     $scope.saveProduct = function (product) {
-
+      console.log('ProductCtrl, saveProduct()');
+      console.log(product);
       $http.put(Constants.API_URL + 'products', product)
         .success(function (data) {
           $log.info('Saved ', data);
@@ -381,6 +408,7 @@ angular.module('m2AdminApp')
         })
         .error(function (data) {
           $log.info('Error ', data);
+          console.log('Error ', data);
         });
     };
 
