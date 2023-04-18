@@ -45,21 +45,8 @@ angular.module('m2AdminApp')
     $http.get(Constants.API_URL + 'campaigns/campaignAll/')
       .success(function (data) {
         data.forEach(function (e) {
-          console.log(e.id);
-          if (e.group.shortName === undefined || e.group.shortName === null) {
-            console.log('Issue at group.shortName for');
-            console.log(e);
-          } else {
-            console.log(e.group.shortName);
-            e.groupShortName = e.group.shortName;
-          }
-          if (e.product.shortName === undefined || e.product.shortName === null) {
-            console.log('Issue at product.shortName for');
-            console.log(e);
-          } else {
-            console.log(e.product.shortName);
-            e.productShortName = e.product.shortName;
-          }
+          e.groupShortName = e.group.shortName;
+          e.productShortName = e.product.shortName;
         });
         $scope.campaigns = data;
       })

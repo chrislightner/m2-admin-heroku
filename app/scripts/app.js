@@ -129,8 +129,8 @@ angular.module('m2AdminApp', [
         console.log($rootScope.currentUser);
 
         //$http.post('//coveragedetails.net/api/index.php/users/check', $rootScope.currentUser)
-        //$http.post('https://api.coveragedetails.net/index.php/users/check', $rootScope.currentUser)
-        $http.post('https://m2-api-2023.herokuapp.com/index.php/users/check', $rootScope.currentUser)
+        $http.post('https://api.coveragedetails.net/index.php/users/check', $rootScope.currentUser)
+        //$http.post('https://m2-api-2023.herokuapp.com/index.php/users/check', $rootScope.currentUser)
           .success(function (data) {
             if (data.status !== "success") {
               if (data.error == 1) {
